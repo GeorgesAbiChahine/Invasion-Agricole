@@ -1,0 +1,62 @@
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan;
+
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
+import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+
+public class Decor {
+
+    private final double SOL_HAUTEUR = 60;
+    private ArrayList<ObjetsDecor> objetsDecors = new ArrayList<>();
+
+    public Decor() {
+        ajouterEtoiles();
+        ajouterImagesDecors();
+    }
+
+
+    public void dessiner(GraphicsContext contexte){
+        contexte.setFill(Color.web("#1a1a1a"));
+        contexte.fillRect(0,0,Partie.LARGEUR,Partie.HAUTEUR);
+        contexte.setFill(Color.web("#225500"));
+        contexte.fillRect(0,Partie.HAUTEUR - SOL_HAUTEUR, Partie.LARGEUR, SOL_HAUTEUR);
+
+        for (int i = 0; i < objetsDecors.size(); i++) {
+            objetsDecors.get(i).dessiner(contexte);
+        }
+
+    }
+
+    private void ajouterEtoiles() {
+        double grandeurEtoile = Utilitaire.generer(8, 15);
+        for (int i = 0; i < 100; i++) {
+            objetsDecors.add(new Etoile(Utilitaire.generer(0, Partie.LARGEUR),
+                    Utilitaire.generer(0, Partie.HAUTEUR / 2), // TODO : Changer Main pour Partie
+                    grandeurEtoile));
+        }
+    }
+
+    private void ajouterImagesDecors() {
+        final double GRANGE_LARGEUR = 113;
+        final double GRANGE_HAUTEUR = 147;
+        final double TRACTEUR_LARGEUR = 89;
+        final double TRACTEUR_HAUTEUR = 55;
+
+        double x = Utilitaire.generer(0, 800);
+        int index = Utilitaire.generer(0,1) < 0.5 ? 0 : 1;
+        while (x < Partie.LARGEUR) {
+            if (index % 2 == 0) {
+                objetsDecors.add(new Grange(x, Partie.HAUTEUR - SOL_HAUTEUR - GRANGE_HAUTEUR,
+                        GRANGE_LARGEUR, GRANGE_HAUTEUR));
+            } else {
+                objetsDecors.add(new Tracteur(x, Partie.HAUTEUR - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
+                        TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR));
+            }
+            index++;
+            x += Utilitaire.generer(500, 800);
+        }
+    }
+}
