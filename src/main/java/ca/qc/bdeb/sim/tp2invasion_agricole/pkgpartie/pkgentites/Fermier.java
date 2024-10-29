@@ -12,6 +12,7 @@ public class Fermier extends Entite{
                 Utilitaire.generer(0, Partie.LARGEUR), Partie.HAUTEUR - Decor.SOL_HAUTEUR - 185);
     }
 
+    //TODO : genererboolean() ? true : false
     private static Image choisirImageAleatoire() {
         String nomImage = Utilitaire.generer(0,1) < 0.5 ? "fermier.png" : "fermiere.png";
         return new Image(nomImage);
