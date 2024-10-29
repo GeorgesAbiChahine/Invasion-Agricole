@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Decor {
 
     public static final double SOL_HAUTEUR = 60;
-    private ArrayList<ObjetsDecor> objetsDecors = new ArrayList<>();
+    private final ArrayList<ObjetsDecor> OBJETS_DECOR = new ArrayList<>();
 
     public Decor() {
         ajouterEtoiles();
@@ -24,8 +24,8 @@ public class Decor {
         contexte.setFill(Color.web("#225500"));
         contexte.fillRect(0,Partie.HAUTEUR - SOL_HAUTEUR, Partie.LARGEUR, SOL_HAUTEUR);
 
-        for (int i = 0; i < objetsDecors.size(); i++) {
-            objetsDecors.get(i).dessiner(contexte);
+        for (var objetsDecor : OBJETS_DECOR) {
+            objetsDecor.dessiner(contexte);
         }
 
     }
@@ -33,7 +33,7 @@ public class Decor {
     private void ajouterEtoiles() {
         double grandeurEtoile = Utilitaire.generer(8, 15);
         for (int i = 0; i < 100; i++) {
-            objetsDecors.add(new Etoile(Utilitaire.generer(0, Partie.LARGEUR),
+            OBJETS_DECOR.add(new Etoile(Utilitaire.generer(0, Partie.LARGEUR),
                     Utilitaire.generer(0, Partie.HAUTEUR / 2), // TODO : Changer Main pour Partie
                     grandeurEtoile));
         }
@@ -49,10 +49,10 @@ public class Decor {
         int index = Utilitaire.generer(0,1) < 0.5 ? 0 : 1;
         while (x < Partie.LARGEUR) {
             if (index % 2 == 0) {
-                objetsDecors.add(new Grange(x, Partie.HAUTEUR - SOL_HAUTEUR - GRANGE_HAUTEUR,
+                OBJETS_DECOR.add(new Grange(x, Partie.HAUTEUR - SOL_HAUTEUR - GRANGE_HAUTEUR,
                         GRANGE_LARGEUR, GRANGE_HAUTEUR));
             } else {
-                objetsDecors.add(new Tracteur(x, Partie.HAUTEUR - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
+                OBJETS_DECOR.add(new Tracteur(x, Partie.HAUTEUR - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
                         TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR));
             }
             index++;

@@ -13,6 +13,7 @@ public class Vache extends Entite{
     }
 
     private static double genererVitesseVache(){
-        return (Utilitaire.generer(0,1) < 0.5 ? -1 : 1) * Utilitaire.generer(10,25);
+        return (Utilitaire.generer(0,1) < 0.5 ? -1 : 1) * Utilitaire.generer(10,50);
     }
+
 }
