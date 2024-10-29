@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class Main extends Application {
         Scene scene = creerSceneJeu(root);
 
         stage.setTitle("Invasion Agricole");
+        stage.getIcons().add(new Image("icone.png"));
         stage.setScene(scene);
         stage.show();
     }
@@ -32,23 +34,27 @@ public class Main extends Application {
         root.getChildren().add(canvas);
 
         GraphicsContext contexte = canvas.getGraphicsContext2D();
-        partie.dessiner(contexte);
+
+        initialiserBoucle(contexte);
 
         return scene;
     }
 
-    private void initialiserBoucle() {
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
+    private void initialiserBoucle(GraphicsContext contexte) {
 
+        AnimationTimer timer = new AnimationTimer() {
+            long dernierTemps = System.nanoTime();
+            @Override
+            public void handle(long now) {
+                contexte.clearRect(0,0,LARGEUR,HAUTEUR);
+                double deltaTime = (now - dernierTemps) * 1e-9;
+               partie.dessiner(contexte, deltaTime);
             }
         };
+        timer.start();
     }
 
     public static void main(String[] args) {
         launch();
     }
-
-
 }

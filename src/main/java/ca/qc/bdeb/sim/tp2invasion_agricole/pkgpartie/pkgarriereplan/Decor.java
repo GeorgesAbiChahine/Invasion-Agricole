@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Decor {
 
-    private final double SOL_HAUTEUR = 60;
+    public static final double SOL_HAUTEUR = 60;
     private ArrayList<ObjetsDecor> objetsDecors = new ArrayList<>();
 
     public Decor() {
