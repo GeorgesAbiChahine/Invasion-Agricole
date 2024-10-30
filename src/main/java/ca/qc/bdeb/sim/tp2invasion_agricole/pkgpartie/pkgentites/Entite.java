@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Entite {
+    private final double GRAVITE = 1000;
     protected Image image;
     protected final double LARGEUR;
     protected final double HAUTEUR;
@@ -38,7 +39,7 @@ public abstract class Entite {
     }
 
     protected void updatePosition(double deltatemps) {
-        vx += deltatemps * ax;
+     //   vx += deltatemps * ax;
         vy += deltatemps * ay;
 
         x += deltatemps * vx;
