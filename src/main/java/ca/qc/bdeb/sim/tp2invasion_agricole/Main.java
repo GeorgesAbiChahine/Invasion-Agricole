@@ -41,14 +41,14 @@ public class Main extends Application {
     }
 
     private void initialiserBoucle(GraphicsContext contexte) {
-
+        partie.genererPartie();
         AnimationTimer timer = new AnimationTimer() {
             long dernierTemps = System.nanoTime();
             @Override
             public void handle(long now) {
-                contexte.clearRect(0,0,LARGEUR,HAUTEUR);
                 double deltaTime = (now - dernierTemps) * 1e-9;
-               partie.dessiner(contexte, deltaTime);
+                partie.update(deltaTime);
+               partie.dessiner(contexte);
             }
         };
         timer.start();

@@ -1,10 +1,11 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Entite {
-    protected final Image IMAGE;
+    protected Image image;
     protected final double LARGEUR;
     protected final double HAUTEUR;
     protected double x;
@@ -15,10 +16,11 @@ public abstract class Entite {
     protected double ay;
 
 
-    public Entite(double ax, double ay, double vx, double vy, double LARGEUR, double HAUTEUR, Image IMAGE, double x, double y) {
+    public Entite(double ax, double ay, double vx, double vy,
+                  double LARGEUR, double HAUTEUR, Image IMAGE, double x, double y) {
         this.HAUTEUR = HAUTEUR;
         this.LARGEUR = LARGEUR;
-        this.IMAGE = IMAGE;
+        this.image = IMAGE;
         this.ay = ay;
         this.ax = ax;
         this.vy = vy;
@@ -28,15 +30,24 @@ public abstract class Entite {
     }
 
     public void dessiner(GraphicsContext contexte) {
-        contexte.drawImage(IMAGE, x, y, LARGEUR, HAUTEUR);
+        contexte.drawImage(image, x, y, LARGEUR, HAUTEUR);
     }
 
-    public void updatePosition(double deltatemps) {
+    public void update(double deltatemps) {
+        updatePosition(deltatemps);
+    }
+
+    protected void updatePosition(double deltatemps) {
         vx += deltatemps * ax;
         vy += deltatemps * ay;
 
         x += deltatemps * vx;
         y += deltatemps * vy;
+
+        x = Math.min(x, Partie.LARGEUR + LARGEUR);
+        x = Math.max(0, x);
+        y = Math.min(y,Partie.HAUTEUR - HAUTEUR);
+        y = Math.max(0,y);
     }
 
 

@@ -9,7 +9,7 @@ public class Fermier extends Entite{
     public Fermier() {
         // Largeur : 83, Hauteur : 185.
         super(0, 0, 0, 0, 83, 185,choisirImageAleatoire(),
-                Utilitaire.generer(0, Partie.LARGEUR), Partie.HAUTEUR - Decor.SOL_HAUTEUR - 185);
+                Utilitaire.generer(0, Partie.LARGEUR), Partie.HAUTEUR - 185);
     }
 
     //TODO : genererboolean() ? true : false
