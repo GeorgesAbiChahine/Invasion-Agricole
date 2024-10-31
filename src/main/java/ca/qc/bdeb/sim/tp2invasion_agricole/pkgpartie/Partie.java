@@ -1,5 +1,6 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 
+import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan.Decor;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
@@ -18,6 +19,7 @@ public class Partie {
     private final Decor ARRIERE_PLAN = new Decor();
     private final Vaisseau VAISSEAU = new Vaisseau();
     private final ArrayList<Entite> ENTITES = new ArrayList<>();
+    private final Camera CAMERA = new Camera();
 
     public void genererPartie(){
         genererEntites();
@@ -25,12 +27,13 @@ public class Partie {
 
     public void dessiner(GraphicsContext contexte) {
         ARRIERE_PLAN.dessiner(contexte);
-        VAISSEAU.dessiner(contexte);
+        VAISSEAU.dessiner(contexte, CAMERA);
         dessinerEntites(contexte);
     }
     public void update(double deltaTemps){
         VAISSEAU.update(deltaTemps);
         updateEntites(deltaTemps);
+        CAMERA.bougerCamera(VAISSEAU);
     }
 
     private void genererEntites(){
@@ -62,7 +65,7 @@ public class Partie {
     }
     private void dessinerEntites(GraphicsContext contexte){
         for (var entite : ENTITES) {
-            entite.dessiner(contexte);
+            entite.dessiner(contexte,CAMERA);
         }
     }
 }

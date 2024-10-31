@@ -31,10 +31,10 @@ public class Decor {
     }
 
     private void ajouterEtoiles() {
-        double grandeurEtoile = Utilitaire.generer(8, 15);
+        double grandeurEtoile = Utilitaire.genererDouble(8, 15);
         for (int i = 0; i < 100; i++) {
-            OBJETS_DECOR.add(new Etoile(Utilitaire.generer(0, Partie.LARGEUR),
-                    Utilitaire.generer(0, Partie.HAUTEUR / 2), // TODO : Changer Main pour Partie
+            OBJETS_DECOR.add(new Etoile(Utilitaire.genererDouble(0, Partie.LARGEUR),
+                    Utilitaire.genererDouble(0, Partie.HAUTEUR / 2), // TODO : Changer Main pour Partie
                     grandeurEtoile));
         }
     }
@@ -45,8 +45,8 @@ public class Decor {
         final double TRACTEUR_LARGEUR = 89;
         final double TRACTEUR_HAUTEUR = 55;
 
-        double x = Utilitaire.generer(0, 800);
-        int index = Utilitaire.generer(0,1) < 0.5 ? 0 : 1;
+        double x = Utilitaire.genererDouble(0, 800);
+        int index = Utilitaire.genererDouble(0,1) < 0.5 ? 0 : 1;
         while (x < Partie.LARGEUR) {
             if (index % 2 == 0) {
                 OBJETS_DECOR.add(new Grange(x, Partie.HAUTEUR - SOL_HAUTEUR - GRANGE_HAUTEUR,
@@ -56,7 +56,7 @@ public class Decor {
                         TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR));
             }
             index++;
-            x += Utilitaire.generer(500, 800);
+            x += Utilitaire.genererDouble(500, 800);
         }
     }
 }

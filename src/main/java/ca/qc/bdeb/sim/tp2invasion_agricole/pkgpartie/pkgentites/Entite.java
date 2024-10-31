@@ -1,11 +1,12 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 
+import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Entite {
-    private final double GRAVITE = 1000;
+
     protected Image image;
     protected final double LARGEUR;
     protected final double HAUTEUR;
@@ -13,25 +14,37 @@ public abstract class Entite {
     protected double y;
     protected double vx;
     protected double vy;
-    protected double ax;
-    protected double ay;
 
 
-    public Entite(double ax, double ay, double vx, double vy,
+    public Entite(double vx, double vy,
                   double LARGEUR, double HAUTEUR, Image IMAGE, double x, double y) {
         this.HAUTEUR = HAUTEUR;
         this.LARGEUR = LARGEUR;
         this.image = IMAGE;
-        this.ay = ay;
-        this.ax = ax;
         this.vy = vy;
         this.vx = vx;
         this.y = y;
         this.x = x;
     }
 
-    public void dessiner(GraphicsContext contexte) {
-        contexte.drawImage(image, x, y, LARGEUR, HAUTEUR);
+    public double getY() {
+        return y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getLARGEUR() {
+        return LARGEUR;
+    }
+
+    public double getHAUTEUR() {
+        return HAUTEUR;
+    }
+
+    public void dessiner(GraphicsContext contexte, Camera camera) {
+        contexte.drawImage(image, camera.getXEntiteEcran(this), camera.getYEntiteEcran(this), LARGEUR, HAUTEUR);
     }
 
     public void update(double deltatemps) {
@@ -39,9 +52,6 @@ public abstract class Entite {
     }
 
     protected void updatePosition(double deltatemps) {
-        vx += deltatemps * ax;
-        vy += deltatemps * ay;
-
         x += deltatemps * vx;
         y += deltatemps * vy;
 

@@ -31,11 +31,13 @@ public class Main extends Application {
     private Scene creerSceneJeu(Pane root){
         var scene = new Scene(root, LARGEUR, HAUTEUR);
         var canvas = new Canvas(LARGEUR,HAUTEUR);
+        canvas.setFocusTraversable(true);
         root.getChildren().add(canvas);
 
         GraphicsContext contexte = canvas.getGraphicsContext2D();
 
         initialiserBoucle(contexte);
+        gererEvenements(root);
 
         return scene;
     }
@@ -49,9 +51,16 @@ public class Main extends Application {
                 double deltaTime = (now - dernierTemps) * 1e-9;
                 partie.update(deltaTime);
                partie.dessiner(contexte);
+               dernierTemps = now;
             }
         };
         timer.start();
+    }
+
+    private void gererEvenements(Pane root){
+        root.setOnKeyPressed(e -> Input.setKeyPressed(e.getCode(),true));
+
+        root.setOnKeyReleased(e -> Input.setKeyPressed(e.getCode(), false));
     }
 
     public static void main(String[] args) {
