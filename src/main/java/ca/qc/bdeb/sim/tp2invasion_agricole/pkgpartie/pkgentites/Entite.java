@@ -39,7 +39,7 @@ public abstract class Entite {
     }
 
     protected void updatePosition(double deltatemps) {
-     //   vx += deltatemps * ax;
+        vx += deltatemps * ax;
         vy += deltatemps * ay;
 
         x += deltatemps * vx;
