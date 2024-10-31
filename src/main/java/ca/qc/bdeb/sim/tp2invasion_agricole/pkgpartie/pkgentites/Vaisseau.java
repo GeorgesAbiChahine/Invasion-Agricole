@@ -3,6 +3,7 @@ package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -81,6 +82,11 @@ public class Vaisseau extends EntiteAcceleratrice {
 
     }
 
+    @Override
+    protected void updatePosition(double deltatemps) {
+        super.updatePosition(deltatemps);
+        y = Math.min(y, Partie.HAUTEUR * 0.4);
+    }
 
     /**
      * @param indexAcceleration 0 : en x, 1 : en y

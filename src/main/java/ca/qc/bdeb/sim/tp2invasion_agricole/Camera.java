@@ -17,11 +17,12 @@ public class Camera {
     }
 
     public void bougerCamera(Vaisseau vaisseau){
-        if (vaisseau.getX() > (Main.LARGEUR * 0.7) && (xEcran + Main.LARGEUR) < Partie.LARGEUR){
-            xEcran += (vaisseau.getX() + vaisseau.getLARGEUR()) - (Main.LARGEUR * 0.7);
+        if (getXEntiteEcran(vaisseau) > (Main.LARGEUR * 0.7) && (xEcran + Main.LARGEUR) < Partie.LARGEUR){
+            xEcran += (getXEntiteEcran(vaisseau) + vaisseau.getLARGEUR()) - (Main.LARGEUR * 0.7);
         }
-        if (vaisseau.getX() < (Main.LARGEUR * 0.3) && xEcran > 0){
-            xEcran -= (vaisseau.getX() + vaisseau.getLARGEUR()) - (Main.LARGEUR * 0.3);
+        if (getXEntiteEcran(vaisseau) < (Main.LARGEUR * 0.3) && xEcran > 0){
+            xEcran -= (getXEntiteEcran(vaisseau) + vaisseau.getLARGEUR()) - (Main.LARGEUR * 0.3);
         }
+
     }
 }
