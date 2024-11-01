@@ -78,8 +78,6 @@ public class Vaisseau extends EntiteAcceleratrice {
 
         imageBase = (Math.abs(a[0]) == ACCELERATION_BASE || Math.abs(a[1]) == ACCELERATION_BASE) ?
                     new Image("base-vaisseau-on.png") : new Image("base-vaisseau-off.png");
-
-
     }
 
     @Override
