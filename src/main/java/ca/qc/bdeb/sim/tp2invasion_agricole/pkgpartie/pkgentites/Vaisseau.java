@@ -15,6 +15,8 @@ public class Vaisseau extends EntiteAcceleratrice {
     private Image imageBase = new Image("base-vaisseau-off.png");
     private final double ACCELERATION_BASE = 2000;
     private final double RALENTISSEMENT = -500;
+
+    private int nbVies = 4;
     public Vaisseau() {
         // Largeur 100, Hauteur 140
         super(0,0, 0, 0, 100, 140, new Image("extraterrestre.png"),

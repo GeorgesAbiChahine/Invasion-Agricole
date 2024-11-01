@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Decor {
 
@@ -47,7 +48,7 @@ public class Decor {
         final double TRACTEUR_HAUTEUR = 55;
 
         double x = Utilitaire.genererDouble(0, 800);
-        int index = Utilitaire.genererDouble(0,1) < 0.5 ? 0 : 1;
+        int index = Utilitaire.genererBoolean() ? 0 : 1;
         while (x < Partie.LARGEUR) {
             if (index % 2 == 0) {
                 OBJETS_DECOR.add(new Grange(x, Partie.HAUTEUR - SOL_HAUTEUR - GRANGE_HAUTEUR,
