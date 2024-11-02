@@ -17,17 +17,17 @@ public class EntiteAcceleratrice extends Entite {
     @Override
     protected void updatePosition(double deltatemps) {
         super.updatePosition(deltatemps);
-        vx += a[0] * deltatemps;
-        vy += a[1] * deltatemps;
+        v[0] += a[0] * deltatemps;
+        v[1] += a[1] * deltatemps;
 
-        if (vx > vitesseMax)
-            vx = vitesseMax;
-        if (vx < -vitesseMax)
-            vx = -vitesseMax;
-
-        if (vy > vitesseMax)
-            vy = vitesseMax;
-        if (vy < -vitesseMax)
-            vy = -vitesseMax;
+       regulerVitesse(0);
+       regulerVitesse(1);
     }
+    private void regulerVitesse(int indexVitesse){
+        if (v[indexVitesse] > vitesseMax)
+            v[indexVitesse] = vitesseMax;
+        if (v[indexVitesse] < -vitesseMax)
+            v[indexVitesse] = -vitesseMax;
+    }
+
 }

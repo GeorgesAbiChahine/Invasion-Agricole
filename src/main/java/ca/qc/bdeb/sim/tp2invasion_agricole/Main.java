@@ -115,7 +115,7 @@ public class Main extends Application {
         }
 
 
-        VBox vBoxTextes = new VBox(10);
+        VBox vBoxTextes = new VBox(40);
         vBoxTextes.setAlignment(Pos.CENTER);
 
         Text titre = new Text("Invasion Agricole");

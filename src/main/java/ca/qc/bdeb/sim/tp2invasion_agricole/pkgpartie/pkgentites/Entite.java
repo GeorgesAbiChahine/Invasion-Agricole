@@ -12,8 +12,12 @@ public abstract class Entite {
     protected final double HAUTEUR;
     protected double x;
     protected double y;
-    protected double vx;
-    protected double vy;
+
+    // v[0] = vx, v[1] = vy
+    protected double[] v = new double[2];
+
+
+    protected double[] position = new double[2];
 
 
     public Entite(double vx, double vy,
@@ -21,8 +25,8 @@ public abstract class Entite {
         this.HAUTEUR = HAUTEUR;
         this.LARGEUR = LARGEUR;
         this.image = IMAGE;
-        this.vy = vy;
-        this.vx = vx;
+        this.v[1] = vy;
+        this.v[0] = vx;
         this.y = y;
         this.x = x;
     }
@@ -52,8 +56,8 @@ public abstract class Entite {
     }
 
     protected void updatePosition(double deltatemps) {
-        x += deltatemps * vx;
-        y += deltatemps * vy;
+        x += deltatemps * v[0];
+        y += deltatemps * v[1];
 
         x = Math.min(x, Partie.LARGEUR + LARGEUR);
         x = Math.max(0, x);
@@ -61,5 +65,13 @@ public abstract class Entite {
         y = Math.max(0,y);
     }
 
-
+    //TODO CREER CLASSE PROJECTILES.
+    protected static double calculerV(double x, double y, double xVaisseau, double yVaisseau,
+                                      int magnitude,int typeVitesse) {
+        double dx = xVaisseau - x;
+        double dy = yVaisseau - y;
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        if (typeVitesse == 0) return magnitude * (dx / distance);
+        else return magnitude * (dy / distance);
+    }
 }

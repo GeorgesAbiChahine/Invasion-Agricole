@@ -37,8 +37,8 @@ public class Vaisseau extends EntiteAcceleratrice {
         contexte.setFill(Color.rgb(255, 255, 0, 0.6));
         contexte.fillOval(camera.getXEntiteEcran(this), camera.getYEntiteEcran(this), LARGEUR, HAUTEUR);
         // Dessin de la base
-        contexte.drawImage(imageBase, camera.getXEntiteEcran(this) + LARGEUR / 2 - largeurBase / 2, camera.getYEntiteEcran(this) + HAUTEUR - hauteurBase);
-
+        contexte.drawImage(imageBase, camera.getXEntiteEcran(this) + LARGEUR / 2 - largeurBase / 2,
+                camera.getYEntiteEcran(this) + HAUTEUR - hauteurBase);
     }
 
     @Override
@@ -62,21 +62,19 @@ public class Vaisseau extends EntiteAcceleratrice {
         gererChangementsAcceleration(1, directionY);
 
         // Mise a jour de la position
-        int directionXAvant = getDirection(vx);
-        int directionYAvant = getDirection(vy);
+        int directionXAvant = getDirection(v[0]);
+        int directionYAvant = getDirection(v[1]);
 
         updatePosition(deltatemps);
 
-        if (directionXAvant != getDirection(vx)) {
-            vx = 0;
+        if (directionXAvant != getDirection(v[0])) {
+            v[0] = 0;
             //a[0] = 0;
         }
-        if (directionYAvant != getDirection(vy)) {
-            vy = 0;
+        if (directionYAvant != getDirection(v[1])) {
+            v[1] = 0;
             //a[1] = 0;
         }
-
-
 
         imageBase = (Math.abs(a[0]) == ACCELERATION_BASE || Math.abs(a[1]) == ACCELERATION_BASE) ?
                     new Image("base-vaisseau-on.png") : new Image("base-vaisseau-off.png");
@@ -96,7 +94,7 @@ public class Vaisseau extends EntiteAcceleratrice {
         if (multiplicateur != 0) {
             a[indexAcceleration] = multiplicateur * ACCELERATION_BASE;
         } else {
-            double vitesse = (indexAcceleration == 0) ? vx : vy;
+            double vitesse = (indexAcceleration == 0) ? v[0] : v[1];
             int directionVitesse = getDirection(vitesse);
             a[indexAcceleration] = directionVitesse * RALENTISSEMENT;
         }

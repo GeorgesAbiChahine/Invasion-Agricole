@@ -26,14 +26,14 @@ public class Vache extends EntiteAvecGravite {
     }
 
     private void changerImageVache(){
-        image = vx < 0 ? vachesImages[0] : vachesImages[1];
+        image = v[0] < 0 ? vachesImages[0] : vachesImages[1];
     }
 
     @Override
     public void update(double deltatemps) {
         super.update(deltatemps);
         if (x == Partie.LARGEUR + LARGEUR || x == 0){
-            vx *= -1;
+            v[0] *= -1;
         }
     }
 }

@@ -14,7 +14,7 @@ public abstract class EntiteAvecGravite extends Entite{
         super.updatePosition(deltatemps);
 
         if (!toucheLeSol())
-            vy += GRAVITE * deltatemps;
+            v[1] += GRAVITE * deltatemps;
     }
 
     private boolean toucheLeSol() {
