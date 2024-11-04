@@ -4,10 +4,10 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Decor {
 
@@ -20,14 +20,14 @@ public class Decor {
     }
 
 
-    public void dessiner(GraphicsContext contexte){
+    public void dessiner(GraphicsContext contexte, Camera camera){
         contexte.setFill(Color.web("#1a1a1a"));
-        contexte.fillRect(0,0,Partie.LARGEUR,Partie.HAUTEUR);
+        contexte.fillRect(0,0,Partie.DIMENSIONS[0],Partie.DIMENSIONS[1]);
         contexte.setFill(Color.web("#225500"));
-        contexte.fillRect(0,Partie.HAUTEUR - SOL_HAUTEUR, Partie.LARGEUR, SOL_HAUTEUR);
+        contexte.fillRect(0,Partie.DIMENSIONS[1] - SOL_HAUTEUR, Partie.DIMENSIONS[0], SOL_HAUTEUR);
 
         for (var objetsDecor : OBJETS_DECOR) {
-            objetsDecor.dessiner(contexte);
+            objetsDecor.dessiner(contexte,camera);
         }
 
     }
@@ -35,8 +35,8 @@ public class Decor {
     private void ajouterEtoiles() {
         double grandeurEtoile = Utilitaire.genererDouble(8, 15);
         for (int i = 0; i < 100; i++) {
-            OBJETS_DECOR.add(new Etoile(Utilitaire.genererDouble(0, Partie.LARGEUR),
-                    Utilitaire.genererDouble(0, Partie.HAUTEUR / 2), // TODO : Changer Main pour Partie
+            OBJETS_DECOR.add(new Etoile(Utilitaire.genererDouble(0, Partie.DIMENSIONS[0]),
+                    Utilitaire.genererDouble(0, Partie.DIMENSIONS[1] / 2),
                     grandeurEtoile));
         }
     }
@@ -49,13 +49,13 @@ public class Decor {
 
         double x = Utilitaire.genererDouble(0, 800);
         int index = Utilitaire.genererBoolean() ? 0 : 1;
-        while (x < Partie.LARGEUR) {
+        while (x < Partie.DIMENSIONS[0]) {
             if (index % 2 == 0) {
-                OBJETS_DECOR.add(new Grange(x, Partie.HAUTEUR - SOL_HAUTEUR - GRANGE_HAUTEUR,
-                        GRANGE_LARGEUR, GRANGE_HAUTEUR));
+                OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - GRANGE_HAUTEUR,
+                        GRANGE_LARGEUR, GRANGE_HAUTEUR,new Image("grange.png")));
             } else {
-                OBJETS_DECOR.add(new Tracteur(x, Partie.HAUTEUR - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
-                        TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR));
+                OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
+                        TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR, new Image("tracteur.png")));
             }
             index++;
             x += Utilitaire.genererDouble(500, 800);

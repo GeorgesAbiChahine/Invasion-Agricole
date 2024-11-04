@@ -10,9 +10,9 @@ public class Vache extends EntiteAvecGravite {
     private final Image[] vachesImages = {new Image("vache.png"), new Image("vache-droite.png")};
 
     public Vache() {
-        super(genererVitesseVache(), 0, 136, 134,
-                new Image("vache.png"), Utilitaire.genererDouble(0, Partie.LARGEUR)
-                , Partie.HAUTEUR - 136);
+        super(new double[]{genererVitesseVache(), 0}, 136, 134,
+                new Image("vache.png"), new double[]{Utilitaire.genererDouble(0, Partie.DIMENSIONS[0])
+                , Partie.DIMENSIONS[1] - 136});
     }
 
     private static double genererVitesseVache(){
@@ -32,7 +32,7 @@ public class Vache extends EntiteAvecGravite {
     @Override
     public void update(double deltatemps) {
         super.update(deltatemps);
-        if (x == Partie.LARGEUR + LARGEUR || x == 0){
+        if ( pos[0]  == Partie.DIMENSIONS[0] - DIMENSIONS[0] ||  pos[0]  == 0){
             v[0] *= -1;
         }
     }

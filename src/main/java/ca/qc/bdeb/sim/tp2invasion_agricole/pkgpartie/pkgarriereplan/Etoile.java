@@ -1,5 +1,6 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan;
 
+import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -12,8 +13,8 @@ public class Etoile extends ObjetsDecor {
 
     //TODO Largeur pour taille est bizarre
     @Override
-    public void dessiner(GraphicsContext contexte) {
+    public void dessiner(GraphicsContext contexte, Camera camera) {
         contexte.setFill(Color.WHITE);
-        contexte.fillText(ILLUSTRATION, x, y, LARGEUR);
+        contexte.fillText(ILLUSTRATION, camera.getXEcran(x), camera.getYEcran(y), LARGEUR);
     }
 }

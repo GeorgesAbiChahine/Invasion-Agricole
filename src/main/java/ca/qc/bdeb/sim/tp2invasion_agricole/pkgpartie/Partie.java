@@ -7,14 +7,14 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Fermier;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vache;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vaisseau;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 
 
 public class Partie {
-    public static final double LARGEUR = Main.LARGEUR * 4;
-    public static final double HAUTEUR = Main.HAUTEUR;
+    public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
     private static int niveauActuel = 1;
     private final Decor ARRIERE_PLAN = new Decor();
     private final Vaisseau VAISSEAU = new Vaisseau();
@@ -26,7 +26,7 @@ public class Partie {
     }
 
     public void dessiner(GraphicsContext contexte) {
-        ARRIERE_PLAN.dessiner(contexte);
+        ARRIERE_PLAN.dessiner(contexte,CAMERA);
         VAISSEAU.dessiner(contexte, CAMERA);
         dessinerEntites(contexte);
     }
@@ -57,10 +57,27 @@ public class Partie {
         }
         return vaches;
     }
+    private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps){
+        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, VAISSEAU,deltaTemps);
+        if (projectile != null)
+            ENTITES.add(projectile);
+    }
 
     private void updateEntites(double deltaTemps){
         for (int i = 0; i < ENTITES.size(); i++) {
+            // Update tout
             ENTITES.get(i).update(deltaTemps);
+
+            // Update les projectiles
+            if (ENTITES.get(i) instanceof Fermier fermier) {
+                tenterGenererProjectiles(fermier,deltaTemps);
+            }
+
+            // Update les éléments à supprimer
+            if (ENTITES.get(i).isASupprimer()) {
+                ENTITES.remove(i);
+                i--;
+            }
         }
     }
     private void dessinerEntites(GraphicsContext contexte){

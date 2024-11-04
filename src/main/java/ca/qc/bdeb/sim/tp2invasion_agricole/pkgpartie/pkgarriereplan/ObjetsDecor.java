@@ -1,5 +1,6 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan;
 
+import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class ObjetsDecor {
@@ -16,5 +17,5 @@ public abstract class ObjetsDecor {
         this.HAUTEUR = h;
     }
 
-    public abstract void dessiner(GraphicsContext contexte);
+    public abstract void dessiner(GraphicsContext contexte, Camera camera);
 }

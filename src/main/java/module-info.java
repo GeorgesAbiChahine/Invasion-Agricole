@@ -11,4 +11,6 @@ module ca.qc.bdeb.sim.tp2invasion_agricole {
     opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan to javafx.fxml;
     exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
     opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie to javafx.fxml;
+    opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites to javafx.fxml;
+    exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 }

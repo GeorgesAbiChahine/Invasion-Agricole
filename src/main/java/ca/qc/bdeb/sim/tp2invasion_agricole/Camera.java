@@ -1,27 +1,29 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vaisseau;
 
 public class Camera {
     private double xEcran = 0;
-    private double yEcran = 0;
+    private double yEcran = 0; //TODO ENLEVER VARIABLE INUTILE
 
-    public double getXEntiteEcran(Entite entite){
-        return entite.getX() - xEcran;
+    public double getXEcran(Double x){
+        return x - xEcran;
     }
 
-    public double getYEntiteEcran(Entite entite) {
-        return entite.getY() - yEcran;
+    //TODO ENLEVER FONCTION INUTILE
+    public double getYEcran(Double y) {
+        return y - yEcran;
     }
 
     public void bougerCamera(Vaisseau vaisseau){
-        if (getXEntiteEcran(vaisseau) + vaisseau.getLARGEUR() > (Main.LARGEUR * 0.7) && (xEcran + Main.LARGEUR) < Partie.LARGEUR){
-            xEcran += (getXEntiteEcran(vaisseau) + vaisseau.getLARGEUR()) - (Main.LARGEUR * 0.7);
+        double EXTREMITE_DROITE = (Main.LARGEUR * 0.7);
+        if (getXEcran(vaisseau.getPos()[0]) + vaisseau.getDimensions()[0] > EXTREMITE_DROITE && (xEcran + Main.LARGEUR) < Partie.DIMENSIONS[0]){
+            xEcran += (getXEcran(vaisseau.getPos()[0]) + vaisseau.getDimensions()[0]) - EXTREMITE_DROITE;
         }
-        if (getXEntiteEcran(vaisseau) < (Main.LARGEUR * 0.3) && xEcran > 0){
-            xEcran -= (Main.LARGEUR * 0.3) - (getXEntiteEcran(vaisseau));
+        double EXTREMITE_GAUCHE = (Main.LARGEUR * 0.3);
+        if (getXEcran(vaisseau.getPos()[0]) < EXTREMITE_GAUCHE && xEcran > 0){
+            xEcran -= EXTREMITE_GAUCHE - (getXEcran(vaisseau.getPos()[0]));
         }
 
     }

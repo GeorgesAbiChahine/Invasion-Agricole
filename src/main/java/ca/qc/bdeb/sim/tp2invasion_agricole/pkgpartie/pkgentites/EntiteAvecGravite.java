@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 
 public abstract class EntiteAvecGravite extends Entite{
     private final double GRAVITE = 1000;
-    public EntiteAvecGravite( double vx, double vy, double LARGEUR, double HAUTEUR, Image IMAGE, double x, double y) {
-        super(vx, vy, LARGEUR, HAUTEUR, IMAGE, x, y);
+    public EntiteAvecGravite(double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
+        super(v, LARGEUR, HAUTEUR, IMAGE, pos);
     }
 
     @Override
@@ -18,6 +18,6 @@ public abstract class EntiteAvecGravite extends Entite{
     }
 
     private boolean toucheLeSol() {
-        return y + HAUTEUR >= Main.HAUTEUR;
+        return pos[1] + DIMENSIONS[1] >= Main.HAUTEUR;
     }
 }
