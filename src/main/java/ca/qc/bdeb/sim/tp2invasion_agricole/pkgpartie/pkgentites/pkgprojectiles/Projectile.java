@@ -10,8 +10,7 @@ public abstract class Projectile extends EntiteAcceleratrice {
 
     protected static double[] calculerV(double[] pos, double[] posVaisseau, int magnitude) {
         double[] delta = new double[2];
-        for (int i = 0; i < pos.length; i++)
-            delta[i] = posVaisseau[i] - pos[i];
+        for (int i = 0; i < pos.length; i++) delta[i] = posVaisseau[i] - pos[i];
 
         double distance = Math.sqrt(delta[0] * delta[0] + delta[1]* delta[1]);
         return new double[]{magnitude * (delta[0] / distance), magnitude * (delta[1] / distance)};

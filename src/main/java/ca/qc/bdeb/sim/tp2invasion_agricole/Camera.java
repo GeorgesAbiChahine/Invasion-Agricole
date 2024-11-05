@@ -16,7 +16,7 @@ public class Camera {
         return y - yEcran;
     }
 
-    public void bougerCamera(Vaisseau vaisseau){
+    public void update(Vaisseau vaisseau){
         double EXTREMITE_DROITE = (Main.LARGEUR * 0.7);
         if (getXEcran(vaisseau.getPos()[0]) + vaisseau.getDimensions()[0] > EXTREMITE_DROITE && (xEcran + Main.LARGEUR) < Partie.DIMENSIONS[0]){
             xEcran += (getXEcran(vaisseau.getPos()[0]) + vaisseau.getDimensions()[0]) - EXTREMITE_DROITE;

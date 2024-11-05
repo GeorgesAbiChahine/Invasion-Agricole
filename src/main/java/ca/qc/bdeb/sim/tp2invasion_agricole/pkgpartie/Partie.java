@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Partie {
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
-    private static int niveauActuel = 1;
+    private int niveauActuel = 1;
     private final Decor ARRIERE_PLAN = new Decor();
     private final Vaisseau VAISSEAU = new Vaisseau();
     private final ArrayList<Entite> ENTITES = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Partie {
     public void update(double deltaTemps){
         VAISSEAU.update(deltaTemps);
         updateEntites(deltaTemps);
-        CAMERA.bougerCamera(VAISSEAU);
+        CAMERA.update(VAISSEAU);
     }
 
     private void genererEntites(){

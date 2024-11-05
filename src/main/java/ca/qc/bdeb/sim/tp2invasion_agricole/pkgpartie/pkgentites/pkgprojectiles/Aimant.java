@@ -21,7 +21,8 @@ public class Aimant extends Projectile {
         for (int i = 0; i < delta.length; i++) delta[i] = pos[i] - posVaisseau[i];
 
         double distance = Math.sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
-        double forceElectrique = (Q_AIMANT * Q_VAISSEAU * K) / distance;
+        //TODO VERIFIER DISTANCE * DISTANCE
+        double forceElectrique = (Q_AIMANT * Q_VAISSEAU * K) / (distance* distance);
 
         // F = ma, mais m = 1. Donc, F = a
         for (int i = 0; i < delta.length; i++) a[i] = forceElectrique * (delta[i] / distance);
