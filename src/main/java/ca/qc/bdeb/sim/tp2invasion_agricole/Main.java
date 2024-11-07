@@ -49,7 +49,7 @@ public class Main extends Application {
         canvas.setFocusTraversable(true);
         root.getChildren().add(canvas);
 
-        GraphicsContext contexte = canvas.getGraphicsContext2D();
+         GraphicsContext contexte = canvas.getGraphicsContext2D();
 
         initialiserBoucle(contexte);
         gererEvenements(root);
@@ -153,6 +153,7 @@ public class Main extends Application {
     }
 
     private void initialiserBoucle(GraphicsContext contexte) {
+
         partie.genererPartie();
         AnimationTimer timer = new AnimationTimer() {
             long dernierTemps = System.nanoTime();
@@ -168,6 +169,7 @@ public class Main extends Application {
         timer.start();
     }
 
+    // TODO FIX BUG BOUCLE DEJA PRESENTE
     private void gererEvenements(Pane root) {
         root.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE) creerSceneIntro();

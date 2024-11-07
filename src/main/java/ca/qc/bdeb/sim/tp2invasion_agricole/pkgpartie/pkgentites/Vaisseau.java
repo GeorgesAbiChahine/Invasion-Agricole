@@ -15,7 +15,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     private Image imageBase = new Image("base-vaisseau-off.png");
     private final double ACCELERATION_BASE = 2000;
     private final double RALENTISSEMENT = -500;
-    private final double HATEUR_MINIMALE = Partie.DIMENSIONS[1] * 0.4;
+    private final double HATEUR_MINIMALE = Partie.DIMENSIONS[1] * 0.6;
     // Séparé en deux pour dimensions horizontale et verticale, puis en encore en deux pour la direction (+, -)
     private final KeyCode[][] TOUCHES_DE_CONTROLE = {{KeyCode.RIGHT, KeyCode.LEFT}, {KeyCode.DOWN, KeyCode.UP}};
 
@@ -73,7 +73,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     @Override
     protected void updatePosition(double deltatemps) {
         super.updatePosition(deltatemps);
-        pos[1] = Math.min(pos[1], HATEUR_MINIMALE);
+        pos[1] = Math.min(pos[1], HATEUR_MINIMALE - DIMENSIONS[1]);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Vaisseau extends EntiteAcceleratrice {
         if (multiplicateur != 0) {
             a[indexAcceleration] = multiplicateur * ACCELERATION_BASE;
         } else { // Sinon, on accélère dans la direction opposée pour ralentir
-            double vitesse = (indexAcceleration == 0) ? v[0] : v[1];
+            double vitesse = v[indexAcceleration];
             int directionVitesse = getDirection(vitesse);
             a[indexAcceleration] = directionVitesse * RALENTISSEMENT;
         }
