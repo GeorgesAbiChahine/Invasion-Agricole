@@ -1,4 +1,4 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;

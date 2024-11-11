@@ -3,11 +3,8 @@ package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan.Decor;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Fermier;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vache;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vaisseau;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor.Decor;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.*;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -90,19 +87,30 @@ public class Partie {
         }
     }
     private void gererDebug() {
-        if (gererTouchesDebug(KeyCode.D)) {
+        if (gererTouchesDebug()) {
             debogage = !debogage;
         }
     }
 
-    private boolean gererTouchesDebug(KeyCode touche) {
-        if (Input.isKeyPressed(touche)) {
-            Input.setKeyPressed(touche, false);
+    private boolean gererTouchesDebug() {
+        if (Input.isKeyPressed(KeyCode.D)) {
+            Input.setKeyPressed(KeyCode.D, false);
             return true;
         } return false;
     }
 
     public static boolean getModeDebogage() {
         return debogage;
+    }
+
+    private void gererCollisions(){
+        for (int i = 0; i < ENTITES.size(); i++) {
+            if (ENTITES.get(i) instanceof EntiteAbsorbable entiteAbsorbable){
+                gererCollisionsRayonEnlevement(entiteAbsorbable);
+            }
+        }
+    }
+    private void gererCollisionsRayonEnlevement(EntiteAbsorbable entiteAbsorbable){
+
     }
 }

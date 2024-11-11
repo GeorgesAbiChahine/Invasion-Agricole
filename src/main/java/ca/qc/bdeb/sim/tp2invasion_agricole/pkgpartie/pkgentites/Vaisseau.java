@@ -30,13 +30,17 @@ public class Vaisseau extends EntiteAcceleratrice {
                  new double[]{(double) Main.LARGEUR / 2 - (double) 100 / 2, 100}, 600);
     }
 
+    public RayonEnlevement getRayonEnlevement() {
+        return rayonEnlevement;
+    }
+
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
         double largeurTete = 66;
         double hauteurTete = 81;
         double largeurBase = 176;
         double hauteurBase = 41;
-        rayonEnlevement.draw(contexte,camera,pos,DIMENSIONS,hauteurBase);
+        rayonEnlevement.draw(contexte,camera,DIMENSIONS[0]);
         // Dessin de la tete
         contexte.drawImage(image, camera.getXEcran(pos[0]) + DIMENSIONS[0] / 2 - largeurTete / 2,
                 pos[1] + DIMENSIONS[1] - hauteurBase - hauteurTete);
@@ -66,8 +70,6 @@ public class Vaisseau extends EntiteAcceleratrice {
 
     @Override
     public void update(double deltatemps) {
-        super.update(deltatemps);
-
         // Gestion de l'accélération
         for (int i = 0; i < TOUCHES_DE_CONTROLE.length; i++) {
             int direction = 0;
@@ -80,16 +82,18 @@ public class Vaisseau extends EntiteAcceleratrice {
 
         // Gestion du bug lors du changment de direction de la vitesse
         int[] directionsPrecendentes = {getDirection(v[0]), getDirection(v[1])};
+
         updatePosition(deltatemps);
+
         for (int j = 0; j < directionsPrecendentes.length; j++) {
             System.out.println(v[j]);
-            if (directionsPrecendentes[j] != getDirection(v[j]))
+            if (directionsPrecendentes[j] != 0 && directionsPrecendentes[j] != getDirection(v[j]))
                 v[j] = 0;
         }
 
         imageBase = (Math.abs(a[0]) == ACCELERATION_BASE || Math.abs(a[1]) == ACCELERATION_BASE) ?
                     new Image("base-vaisseau-on.png") : new Image("base-vaisseau-off.png");
-        rayonEnlevement.update(deltatemps);
+        rayonEnlevement.update(deltatemps, this);
     }
 
     @Override
@@ -115,6 +119,8 @@ public class Vaisseau extends EntiteAcceleratrice {
     }
 
     private int getDirection(double v) {
+        if (v == 0)
+            return 0;
         return ((v > 0) ? 1 : -1);
     }
 
