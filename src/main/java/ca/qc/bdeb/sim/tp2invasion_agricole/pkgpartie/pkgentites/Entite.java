@@ -1,6 +1,6 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -75,5 +75,12 @@ public abstract class Entite {
         return aSupprimer;
     }
 
-
+    public boolean estEnCollisionAvec(Entite entite) {
+        double[] posEntite = entite.getPos();
+        double[] dimensionsEntite = entite.getDimensions();
+        return ((pos[0] < posEntite[0] + dimensionsEntite[0]) &&
+                (pos[0] + DIMENSIONS[0] > posEntite[0]) &&
+                (pos[1] < posEntite[1] + dimensionsEntite[1]) &&
+                (pos[1] + DIMENSIONS[1] > posEntite[1]));
+    }
 }

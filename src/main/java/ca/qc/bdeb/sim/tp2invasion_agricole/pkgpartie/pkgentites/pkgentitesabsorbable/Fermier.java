@@ -1,9 +1,10 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Aimant;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Girouette;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.PotDeFleur;
@@ -11,7 +12,7 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.P
 import javafx.scene.image.Image;
 
 
-public class Fermier extends Entite {
+public class Fermier extends EntiteAbsorbable {
     private double tempsPourLancer = Utilitaire.genererDouble(0, 2);
 
     public Fermier() {
@@ -33,7 +34,7 @@ public class Fermier extends Entite {
                 int rnd = (int) Utilitaire.genererDouble(0, 3);
                 switch (rnd) {
                     case 0:
-                        return new Aimant(pos, vaisseau.pos, 300);
+                        return new Aimant(pos, vaisseau.getPos(), 300);
                     case 1:
                         return new Girouette(pos, vaisseau.getPosCentre());
                     case 2:
@@ -42,5 +43,10 @@ public class Fermier extends Entite {
             }
         }
         return null;
+    }
+
+    @Override
+    protected void gererAbsorptionParVaisseau(Vaisseau vaisseau) {
+        vaisseau.ajouterPersonneAbsorbee();
     }
 }

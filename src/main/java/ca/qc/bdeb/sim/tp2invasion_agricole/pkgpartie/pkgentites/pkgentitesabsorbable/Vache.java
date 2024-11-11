@@ -1,8 +1,9 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -35,5 +36,10 @@ public class Vache extends EntiteAbsorbable {
         if ( pos[0]  == Partie.DIMENSIONS[0] - DIMENSIONS[0] ||  pos[0]  == 0){
             v[0] *= -1;
         }
+    }
+
+    @Override
+    protected void gererAbsorptionParVaisseau(Vaisseau vaisseau) {
+        vaisseau.ajouterPoint();
     }
 }

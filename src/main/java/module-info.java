@@ -7,10 +7,16 @@ module ca.qc.bdeb.sim.tp2invasion_agricole {
 
     opens ca.qc.bdeb.sim.tp2invasion_agricole to javafx.fxml;
     exports ca.qc.bdeb.sim.tp2invasion_agricole;
-    exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor;
-    opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor to javafx.fxml;
     exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
     opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie to javafx.fxml;
     opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites to javafx.fxml;
     exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
+    exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable;
+    opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable to javafx.fxml;
+    exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau;
+    opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau to javafx.fxml;
+    exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor;
+    opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor to javafx.fxml;
+    exports ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface;
+    opens ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface to javafx.fxml;
 }

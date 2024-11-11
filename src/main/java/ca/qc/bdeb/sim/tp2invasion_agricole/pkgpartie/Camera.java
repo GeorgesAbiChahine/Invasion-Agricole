@@ -1,7 +1,7 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vaisseau;
+import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 
 public class Camera {
     private double xEcran = 0;

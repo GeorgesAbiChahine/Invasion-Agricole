@@ -1,11 +1,14 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor.Decor;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor.Decor;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.*;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.EntiteAbsorbable;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Fermier;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Vache;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
@@ -21,28 +24,30 @@ public class Partie {
     private final Camera CAMERA = new Camera();
     private static boolean debogage = false;
 
-    public void genererPartie(){
+    public void genererPartie() {
         genererEntites();
     }
 
     public void dessiner(GraphicsContext contexte) {
-        ARRIERE_PLAN.dessiner(contexte,CAMERA);
+        ARRIERE_PLAN.dessiner(contexte, CAMERA);
         VAISSEAU.dessiner(contexte, CAMERA);
         dessinerEntites(contexte);
     }
-    public void update(double deltaTemps){
+
+    public void update(double deltaTemps) {
         gererDebug();
         VAISSEAU.update(deltaTemps);
-        updateEntites(deltaTemps);
         CAMERA.update(VAISSEAU);
+        updateEntites(deltaTemps);
+        gererCollisions();
     }
 
-    private void genererEntites(){
+    private void genererEntites() {
         ENTITES.addAll(genererFermiers());
         ENTITES.addAll(genererVaches());
     }
 
-    private ArrayList<Fermier> genererFermiers(){
+    private ArrayList<Fermier> genererFermiers() {
         ArrayList<Fermier> fermiers = new ArrayList<>();
         int nbFermiers = 3 + 3 * (niveauActuel - 1);
         for (int i = 0; i < nbFermiers; i++) {
@@ -50,28 +55,30 @@ public class Partie {
         }
         return fermiers;
     }
-    private ArrayList<Vache> genererVaches(){
+
+    private ArrayList<Vache> genererVaches() {
         ArrayList<Vache> vaches = new ArrayList<>();
-       int nbVaches = 5 + 2 * niveauActuel;
+        int nbVaches = 5 + 2 * niveauActuel;
         for (int i = 0; i < nbVaches; i++) {
             vaches.add(new Vache());
         }
         return vaches;
     }
-    private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps){
-        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, VAISSEAU,deltaTemps);
+
+    private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps) {
+        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, VAISSEAU, deltaTemps);
         if (projectile != null)
             ENTITES.add(projectile);
     }
 
-    private void updateEntites(double deltaTemps){
+    private void updateEntites(double deltaTemps) {
         for (int i = 0; i < ENTITES.size(); i++) {
             // Update tout
             ENTITES.get(i).update(deltaTemps);
 
             // Update les projectiles
             if (ENTITES.get(i) instanceof Fermier fermier) {
-                tenterGenererProjectiles(fermier,deltaTemps);
+                tenterGenererProjectiles(fermier, deltaTemps);
             }
 
             // Update les éléments à supprimer
@@ -81,11 +88,13 @@ public class Partie {
             }
         }
     }
-    private void dessinerEntites(GraphicsContext contexte){
+
+    private void dessinerEntites(GraphicsContext contexte) {
         for (var entite : ENTITES) {
-            entite.dessiner(contexte,CAMERA);
+            entite.dessiner(contexte, CAMERA);
         }
     }
+
     private void gererDebug() {
         if (gererTouchesDebug()) {
             debogage = !debogage;
@@ -96,21 +105,18 @@ public class Partie {
         if (Input.isKeyPressed(KeyCode.D)) {
             Input.setKeyPressed(KeyCode.D, false);
             return true;
-        } return false;
+        }
+        return false;
     }
 
     public static boolean getModeDebogage() {
         return debogage;
     }
 
-    private void gererCollisions(){
-        for (int i = 0; i < ENTITES.size(); i++) {
-            if (ENTITES.get(i) instanceof EntiteAbsorbable entiteAbsorbable){
-                gererCollisionsRayonEnlevement(entiteAbsorbable);
-            }
+    private void gererCollisions() {
+        for (var entite : ENTITES) {
+            if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(VAISSEAU);
+            else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(VAISSEAU);
         }
-    }
-    private void gererCollisionsRayonEnlevement(EntiteAbsorbable entiteAbsorbable){
-
     }
 }

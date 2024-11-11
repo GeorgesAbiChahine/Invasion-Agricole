@@ -1,4 +1,4 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface;
 
 import javafx.scene.image.Image;
 

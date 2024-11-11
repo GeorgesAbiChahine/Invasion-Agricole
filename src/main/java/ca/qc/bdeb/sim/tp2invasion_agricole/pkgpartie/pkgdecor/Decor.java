@@ -1,6 +1,6 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgDecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
 import javafx.scene.canvas.GraphicsContext;

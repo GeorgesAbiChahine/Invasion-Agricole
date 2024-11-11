@@ -1,6 +1,7 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.EntiteAcceleratrice;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import javafx.scene.image.Image;
 
 public abstract class Projectile extends EntiteAcceleratrice {
@@ -19,5 +20,12 @@ public abstract class Projectile extends EntiteAcceleratrice {
     @Override
     protected void gererLimites(int axe, double extremite) {
         if (pos[axe] < (-DIMENSIONS[axe]) || pos[axe] > extremite) aSupprimer = true;
+    }
+
+    public void gererAttaqueSurVaisseau(Vaisseau vaisseau) {
+        if (estEnCollisionAvec(vaisseau)) {
+            vaisseau.prendDegats();
+            aSupprimer = true;
+        }
     }
 }
