@@ -6,7 +6,7 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Vache extends EntiteAvecGravite {
+public class Vache extends EntiteAbsorbable {
     private final Image[] vachesImages = {new Image("vache.png"), new Image("vache-droite.png")};
 
     public Vache() {

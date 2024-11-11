@@ -4,6 +4,7 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public abstract class Entite {
     protected boolean aSupprimer = false; // Est-ce que l'entité est à supprimer du tableau
@@ -42,7 +43,15 @@ public abstract class Entite {
     }
 
     public void dessiner(GraphicsContext contexte, Camera camera) {
-        contexte.drawImage(image, camera.getXEcran(pos[0]), camera.getYEcran(pos[1]), DIMENSIONS[0], DIMENSIONS[1]);
+        contexte.drawImage(image, camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
+        gererDessinDebogage(contexte, camera);
+    }
+
+    public void gererDessinDebogage(GraphicsContext contexte, Camera camera) {
+        if (Partie.getModeDebogage()) {
+            contexte.setStroke(Color.YELLOW);
+            contexte.strokeRect(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
+        }
     }
 
     public void update(double deltatemps) {

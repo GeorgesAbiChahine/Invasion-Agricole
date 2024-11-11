@@ -7,7 +7,7 @@ public class Aimant extends Projectile {
     private double[] posVaisseau;
     public Aimant(double[] pos, double[] posVaisseau, double vitesseMax) {
         super(new double[]{0, 0}, new double[]{0, 0}, 42, 40,
-                new Image("aimant.png"), new double[]{pos[0], pos[1]}, 300);
+                new Image("aimant.png"), new double[]{pos[0], pos[1]}, vitesseMax);
         this.posVaisseau = posVaisseau;
     }
 
@@ -26,7 +26,6 @@ public class Aimant extends Projectile {
 
         // F = ma, mais m = 1. Donc, F = a
         for (int i = 0; i < delta.length; i++) a[i] = forceElectrique * (delta[i] / distance);
-
     }
 
     @Override

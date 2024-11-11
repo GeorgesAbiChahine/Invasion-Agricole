@@ -3,9 +3,8 @@ package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
 import javafx.scene.image.Image;
 
-public abstract class EntiteAvecGravite extends Entite{
-    private final double GRAVITE = 1000;
-    public EntiteAvecGravite(double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
+public abstract class EntiteAbsorbable extends Entite{
+    public EntiteAbsorbable(double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
         super(v, LARGEUR, HAUTEUR, IMAGE, pos);
     }
 
@@ -13,6 +12,7 @@ public abstract class EntiteAvecGravite extends Entite{
     protected void updatePosition(double deltatemps) {
         super.updatePosition(deltatemps);
 
+        final double GRAVITE = 1000;
         if (!toucheLeSol())
             v[1] += GRAVITE * deltatemps;
     }

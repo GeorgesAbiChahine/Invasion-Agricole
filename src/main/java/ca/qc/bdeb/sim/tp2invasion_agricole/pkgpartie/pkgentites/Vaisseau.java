@@ -15,10 +15,14 @@ public class Vaisseau extends EntiteAcceleratrice {
     private Image imageBase = new Image("base-vaisseau-off.png");
     private final double ACCELERATION_BASE = 2000;
     private final double RALENTISSEMENT = -500;
-    private final double HATEUR_MINIMALE = Partie.DIMENSIONS[1] * 0.6;
+
+    private final double HAUTEUR_MINIMALE = Partie.DIMENSIONS[1] * 0.6;
+    public final double EXTREMITE_DROITE = (Main.LARGEUR * 0.7);
+    public final double EXTREMITE_GAUCHE = (Main.LARGEUR * 0.3);
     // Séparé en deux pour dimensions horizontale et verticale, puis en encore en deux pour la direction (+, -)
     private final KeyCode[][] TOUCHES_DE_CONTROLE = {{KeyCode.RIGHT, KeyCode.LEFT}, {KeyCode.DOWN, KeyCode.UP}};
 
+    private final RayonEnlevement rayonEnlevement = new RayonEnlevement();
     private int nbVies = 4;
     public Vaisseau() {
         // Largeur 100, Hauteur 140
@@ -32,16 +36,32 @@ public class Vaisseau extends EntiteAcceleratrice {
         double hauteurTete = 81;
         double largeurBase = 176;
         double hauteurBase = 41;
-
+        rayonEnlevement.draw(contexte,camera,pos,DIMENSIONS,hauteurBase);
         // Dessin de la tete
         contexte.drawImage(image, camera.getXEcran(pos[0]) + DIMENSIONS[0] / 2 - largeurTete / 2,
-                camera.getYEcran(pos[1]) + DIMENSIONS[1] - hauteurBase - hauteurTete);
+                pos[1] + DIMENSIONS[1] - hauteurBase - hauteurTete);
         // Dessin de l'oval
         contexte.setFill(Color.rgb(255, 255, 0, 0.6));
-        contexte.fillOval(camera.getXEcran(pos[0]), camera.getYEcran(pos[1]), DIMENSIONS[0], DIMENSIONS[1]);
+        contexte.fillOval(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
         // Dessin de la base
         contexte.drawImage(imageBase, camera.getXEcran(pos[0]) + DIMENSIONS[0] / 2 - largeurBase / 2,
-                camera.getYEcran(pos[1]) + DIMENSIONS[1] - hauteurBase);
+                pos[1] + DIMENSIONS[1] - hauteurBase);
+
+        gererDessinDebogage(contexte, camera);
+
+    }
+
+    @Override
+    public void gererDessinDebogage(GraphicsContext contexte, Camera camera) {
+        super.gererDessinDebogage(contexte, camera);
+
+        // Gestion des lignes de limites
+        if (Partie.getModeDebogage()) {
+            contexte.setStroke(Color.GRAY);
+            contexte.strokeLine(0, HAUTEUR_MINIMALE, Main.LARGEUR, HAUTEUR_MINIMALE);
+            contexte.strokeLine(EXTREMITE_GAUCHE, 0, EXTREMITE_GAUCHE, Main.HAUTEUR);
+            contexte.strokeLine(EXTREMITE_DROITE, 0, EXTREMITE_DROITE, Main.HAUTEUR);
+        }
     }
 
     @Override
@@ -62,18 +82,20 @@ public class Vaisseau extends EntiteAcceleratrice {
         int[] directionsPrecendentes = {getDirection(v[0]), getDirection(v[1])};
         updatePosition(deltatemps);
         for (int j = 0; j < directionsPrecendentes.length; j++) {
+            System.out.println(v[j]);
             if (directionsPrecendentes[j] != getDirection(v[j]))
                 v[j] = 0;
         }
 
         imageBase = (Math.abs(a[0]) == ACCELERATION_BASE || Math.abs(a[1]) == ACCELERATION_BASE) ?
                     new Image("base-vaisseau-on.png") : new Image("base-vaisseau-off.png");
+        rayonEnlevement.update(deltatemps);
     }
 
     @Override
     protected void updatePosition(double deltatemps) {
         super.updatePosition(deltatemps);
-        pos[1] = Math.min(pos[1], HATEUR_MINIMALE - DIMENSIONS[1]);
+        pos[1] = Math.min(pos[1], HAUTEUR_MINIMALE - DIMENSIONS[1]);
     }
 
     /**

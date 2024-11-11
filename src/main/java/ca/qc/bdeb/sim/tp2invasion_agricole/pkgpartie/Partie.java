@@ -1,6 +1,7 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgarriereplan.Decor;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
@@ -9,6 +10,7 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vache;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Vaisseau;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class Partie {
     private final Vaisseau VAISSEAU = new Vaisseau();
     private final ArrayList<Entite> ENTITES = new ArrayList<>();
     private final Camera CAMERA = new Camera();
+    private static boolean debogage = false;
 
     public void genererPartie(){
         genererEntites();
@@ -31,6 +34,7 @@ public class Partie {
         dessinerEntites(contexte);
     }
     public void update(double deltaTemps){
+        gererDebug();
         VAISSEAU.update(deltaTemps);
         updateEntites(deltaTemps);
         CAMERA.update(VAISSEAU);
@@ -84,5 +88,21 @@ public class Partie {
         for (var entite : ENTITES) {
             entite.dessiner(contexte,CAMERA);
         }
+    }
+    private void gererDebug() {
+        if (gererTouchesDebug(KeyCode.D)) {
+            debogage = !debogage;
+        }
+    }
+
+    private boolean gererTouchesDebug(KeyCode touche) {
+        if (Input.isKeyPressed(touche)) {
+            Input.setKeyPressed(touche, false);
+            return true;
+        } return false;
+    }
+
+    public static boolean getModeDebogage() {
+        return debogage;
     }
 }

@@ -27,12 +27,12 @@ public class Main extends Application {
     public final static int HAUTEUR = 520;
     private Partie partie;
     private Stage stage;
+    private AnimationTimer timer;
 
     @Override
     public void start(Stage stage) {
         this.stage = stage;
         creerSceneIntro();
-
 
         stage.setResizable(false);
         stage.setTitle("Invasion Agricole");
@@ -49,7 +49,7 @@ public class Main extends Application {
         canvas.setFocusTraversable(true);
         root.getChildren().add(canvas);
 
-         GraphicsContext contexte = canvas.getGraphicsContext2D();
+        GraphicsContext contexte = canvas.getGraphicsContext2D();
 
         initialiserBoucle(contexte);
         gererEvenements(root);
@@ -153,9 +153,12 @@ public class Main extends Application {
     }
 
     private void initialiserBoucle(GraphicsContext contexte) {
+        if (timer != null) {
+            timer.stop();
+        }
 
         partie.genererPartie();
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             long dernierTemps = System.nanoTime();
 
             @Override

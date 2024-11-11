@@ -14,6 +14,6 @@ public class ImagesDecor extends ObjetsDecor {
 
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
-        contexte.drawImage(image, camera.getXEcran(x), camera.getYEcran(y), LARGEUR, HAUTEUR);
+        contexte.drawImage(image, camera.getXEcran(x), y, LARGEUR, HAUTEUR);
     }
 }

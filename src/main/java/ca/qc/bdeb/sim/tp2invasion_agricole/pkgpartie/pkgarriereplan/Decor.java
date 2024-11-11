@@ -29,7 +29,6 @@ public class Decor {
         for (var objetsDecor : OBJETS_DECOR) {
             objetsDecor.dessiner(contexte,camera);
         }
-
     }
 
     private void ajouterEtoiles() {

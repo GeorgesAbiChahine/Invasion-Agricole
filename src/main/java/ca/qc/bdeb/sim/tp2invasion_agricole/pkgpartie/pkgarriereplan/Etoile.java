@@ -15,6 +15,6 @@ public class Etoile extends ObjetsDecor {
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
         contexte.setFill(Color.WHITE);
-        contexte.fillText(ILLUSTRATION, camera.getXEcran(x), camera.getYEcran(y), LARGEUR);
+        contexte.fillText(ILLUSTRATION, camera.getXEcran(x), y, LARGEUR);
     }
 }

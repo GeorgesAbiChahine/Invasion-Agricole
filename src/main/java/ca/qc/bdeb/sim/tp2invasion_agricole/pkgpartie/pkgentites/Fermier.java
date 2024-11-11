@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 
 
 public class Fermier extends Entite {
-    private double tempsPourLancer = Utilitaire.genererDouble(0,2);
+    private double tempsPourLancer = Utilitaire.genererDouble(0, 2);
 
     public Fermier() {
         // Largeur : 83, Hauteur : 185.
