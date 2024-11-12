@@ -28,7 +28,6 @@ public class Partie {
     private Interface anInterface = new Interface();
 
     public void genererPartie() {
-        vaisseau = new Vaisseau();
         genererEntites();
     }
 
