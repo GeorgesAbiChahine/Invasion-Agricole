@@ -9,6 +9,7 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorb
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Vache;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface.Interface;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
@@ -19,25 +20,29 @@ public class Partie {
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
     private int niveauActuel = 1;
     private final Decor ARRIERE_PLAN = new Decor();
-    private final Vaisseau VAISSEAU = new Vaisseau();
+    private Vaisseau vaisseau = new Vaisseau();
     private final ArrayList<Entite> ENTITES = new ArrayList<>();
     private final Camera CAMERA = new Camera();
     private static boolean debogage = false;
 
+    private Interface anInterface = new Interface();
+
     public void genererPartie() {
+        vaisseau = new Vaisseau();
         genererEntites();
     }
 
     public void dessiner(GraphicsContext contexte) {
         ARRIERE_PLAN.dessiner(contexte, CAMERA);
-        VAISSEAU.dessiner(contexte, CAMERA);
+        vaisseau.dessiner(contexte, CAMERA);
         dessinerEntites(contexte);
+        anInterface.dessiner(contexte, vaisseau, ENTITES);
     }
 
     public void update(double deltaTemps) {
         gererDebug();
-        VAISSEAU.update(deltaTemps);
-        CAMERA.update(VAISSEAU);
+        vaisseau.update(deltaTemps);
+        CAMERA.update(vaisseau);
         updateEntites(deltaTemps);
         gererCollisions();
     }
@@ -66,7 +71,7 @@ public class Partie {
     }
 
     private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps) {
-        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, VAISSEAU, deltaTemps);
+        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, vaisseau, deltaTemps);
         if (projectile != null)
             ENTITES.add(projectile);
     }
@@ -115,8 +120,8 @@ public class Partie {
 
     private void gererCollisions() {
         for (var entite : ENTITES) {
-            if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(VAISSEAU);
-            else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(VAISSEAU);
+            if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(vaisseau);
+            else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(vaisseau);
         }
     }
 }

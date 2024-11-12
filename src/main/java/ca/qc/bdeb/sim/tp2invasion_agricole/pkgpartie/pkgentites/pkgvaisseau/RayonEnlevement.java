@@ -16,8 +16,18 @@ public class RayonEnlevement extends Entite {
     private boolean peutEnlever = true;
 
     public RayonEnlevement(Vaisseau vaisseau) {
-        super(null, vaisseau.getDimensions()[0], 0, null, new double[]{vaisseau.getPos()[0], getYRayon(vaisseau)});
+        super(null, vaisseau.getDimensions()[0], 0, null, new double[]{vaisseau.getPos()[0],
+                getYRayon(vaisseau)});
     }
+
+    public double getCharge() {
+        return charge;
+    }
+
+    public boolean isPeutEnlever() {
+        return peutEnlever;
+    }
+
     protected static double getYRayon(Vaisseau vaisseau) {
         return (vaisseau.getPos()[1] + vaisseau.getDimensions()[1] - vaisseau.getImageBase().getHeight() / 2);
     }
@@ -40,6 +50,10 @@ public class RayonEnlevement extends Entite {
         if (charge >= 1) {
             charge = 1;
             peutEnlever = true;
+        }
+        if (Input.isKeyPressed(KeyCode.E)) {
+            charge = 1;
+            Input.setKeyPressed(KeyCode.E, false);
         }
     }
 

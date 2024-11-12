@@ -6,8 +6,8 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vais
 import javafx.scene.image.Image;
 
 public abstract class EntiteAbsorbable extends Entite {
-    private boolean estEnEnlevement = false;
-    private double vitesseOriginale;
+    protected boolean estEnEnlevement = false;
+
 
     public EntiteAbsorbable(double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
         super(v, LARGEUR, HAUTEUR, IMAGE, pos);

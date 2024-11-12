@@ -22,7 +22,8 @@ public class Vaisseau extends EntiteAcceleratrice {
     private final KeyCode[][] TOUCHES_DE_CONTROLE = {{KeyCode.RIGHT, KeyCode.LEFT}, {KeyCode.DOWN, KeyCode.UP}};
 
     private final RayonEnlevement rayonEnlevement = new RayonEnlevement(this);
-
+    private final int NB_VIES_MAX = 4;
+    protected boolean estInvincible = false;
     private int nombreVies = 4;
     private int nombrePoints = 0;
     private int nombrePersonnesAbsorbees = 0;
@@ -33,9 +34,20 @@ public class Vaisseau extends EntiteAcceleratrice {
                 new double[]{(double) Main.LARGEUR / 2 - (double) 100 / 2, 100}, 600);
     }
 
+    public int getNombreVies() {
+        return nombreVies;
+    }
+
+    public int getNombrePoints() {
+        return nombrePoints;
+    }
+
+    public boolean estInvincible() {
+        return estInvincible;
+    }
+
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
-
         rayonEnlevement.dessiner(contexte, camera);
 
         // Dessin de la tete
@@ -49,7 +61,6 @@ public class Vaisseau extends EntiteAcceleratrice {
                 pos[1] + DIMENSIONS[1] - imageBase.getHeight());
 
         gererDessinDebogage(contexte, camera);
-
     }
 
     @Override
@@ -90,6 +101,16 @@ public class Vaisseau extends EntiteAcceleratrice {
         imageBase = (Math.abs(a[0]) == ACCELERATION_BASE || Math.abs(a[1]) == ACCELERATION_BASE) ?
                 new Image("base-vaisseau-on.png") : new Image("base-vaisseau-off.png");
         rayonEnlevement.update(deltatemps, this);
+
+        //TODO VOIR SI L ENDROI EST GOOD
+        if (Input.isKeyPressed(KeyCode.W) && nombreVies < NB_VIES_MAX) {
+            nombreVies++;
+            Input.setKeyPressed(KeyCode.W, false);
+        }
+        if (Input.isKeyPressed(KeyCode.Q)){
+            estInvincible = !estInvincible;
+            Input.setKeyPressed(KeyCode.Q,false);
+        }
     }
 
     @Override
@@ -135,7 +156,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     }
 
     public void prendDegats() {
-        nombreVies--;
+        if (!estInvincible) nombreVies--;
     }
 
     public void ajouterPoint() {
