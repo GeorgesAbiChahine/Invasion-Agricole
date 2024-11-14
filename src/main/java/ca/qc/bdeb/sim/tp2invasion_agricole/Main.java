@@ -154,9 +154,9 @@ public class Main extends Application {
     }
 
     private void initialiserBoucle(GraphicsContext contexte) {
-        if (timer != null) {
-            timer.stop();
-        }
+//        if (timer != null) {
+//            timer.stop();
+//        }
 
         partie.genererPartie();
         timer = new AnimationTimer() {
@@ -168,15 +168,21 @@ public class Main extends Application {
                 partie.update(deltaTime);
                 partie.dessiner(contexte);
                 dernierTemps = now;
+                if (partie.getPartieEstTermine()) {
+                    creerSceneIntro();
+                    timer.stop();
+                }
             }
         };
         timer.start();
     }
 
-    // TODO FIX BUG BOUCLE DEJA PRESENTE
     private void gererEvenements(Pane root) {
         root.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ESCAPE) creerSceneIntro();
+            if (e.getCode() == KeyCode.ESCAPE) {
+                creerSceneIntro();
+                timer.stop();
+            }
             else Input.setKeyPressed(e.getCode(), true);
         });
 

@@ -34,7 +34,7 @@ public class Fermier extends EntiteAbsorbable {
                 int rnd = (int) Utilitaire.genererDouble(0, 3);
                 switch (rnd) {
                     case 0:
-                        return new Aimant(pos, vaisseau.getPosCentre(), 300);
+                        return new Aimant(pos, vaisseau, 300);
                     case 1:
                         return new Girouette(pos, vaisseau.getPosCentre());
                     case 2:

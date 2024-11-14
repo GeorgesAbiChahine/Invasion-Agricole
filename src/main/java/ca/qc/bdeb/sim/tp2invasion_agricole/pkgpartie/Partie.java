@@ -10,8 +10,12 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorb
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface.Interface;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
@@ -19,31 +23,50 @@ import java.util.ArrayList;
 public class Partie {
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
     private int niveauActuel = 1;
-    private final Decor ARRIERE_PLAN = new Decor();
+    private int nombreTotalVaches;
+    private double opaciteFinNiveau = 0;
+    private Decor arrierePlan = new Decor();
     private Vaisseau vaisseau = new Vaisseau();
     private final ArrayList<Entite> ENTITES = new ArrayList<>();
-    private final Camera CAMERA = new Camera();
-    private static boolean debogage = false;
-
-    private Interface anInterface = new Interface();
+    private Camera camera = new Camera();
+    private static boolean enDebogage = false;
+    private Interface interfaceDuNiveau = new Interface();
+    private boolean finNiveau = false;
 
     public void genererPartie() {
+        opaciteFinNiveau = 0;
+        finNiveau = false;
+        arrierePlan = new Decor();
+        vaisseau.reinitialiserPosition();
+        ENTITES.clear();
+        camera = new Camera();
+        interfaceDuNiveau = new Interface();
         genererEntites();
     }
 
     public void dessiner(GraphicsContext contexte) {
-        ARRIERE_PLAN.dessiner(contexte, CAMERA);
-        vaisseau.dessiner(contexte, CAMERA);
+        arrierePlan.dessiner(contexte, camera);
+        vaisseau.dessiner(contexte, camera);
         dessinerEntites(contexte);
-        anInterface.dessiner(contexte, vaisseau, ENTITES);
+        interfaceDuNiveau.dessiner(contexte, vaisseau, ENTITES);
+        gererAnimationFinNiveau(contexte);
     }
 
+    // TODO ONE TIME KEY PRESS
     public void update(double deltaTemps) {
+        if (Input.isKeyPressed(KeyCode.I)) {
+            Input.setKeyPressed(KeyCode.I, false);
+            finNiveau = true;
+        }
+
+        if (vaisseau.getNombrePoints() == nombreTotalVaches) finNiveau = true;
+
         gererDebug();
         vaisseau.update(deltaTemps);
-        CAMERA.update(vaisseau);
+        camera.update(vaisseau);
         updateEntites(deltaTemps);
         gererCollisions();
+        gererFinNiveau(deltaTemps);
     }
 
     private void genererEntites() {
@@ -66,11 +89,12 @@ public class Partie {
         for (int i = 0; i < nbVaches; i++) {
             vaches.add(new Vache());
         }
+        nombreTotalVaches = vaches.size();
         return vaches;
     }
 
     private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps) {
-        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, vaisseau, deltaTemps);
+        Projectile projectile = fermier.tenterCreerProjectile(camera, vaisseau, deltaTemps);
         if (projectile != null)
             ENTITES.add(projectile);
     }
@@ -95,13 +119,13 @@ public class Partie {
 
     private void dessinerEntites(GraphicsContext contexte) {
         for (var entite : ENTITES) {
-            entite.dessiner(contexte, CAMERA);
+            entite.dessiner(contexte, camera);
         }
     }
 
     private void gererDebug() {
         if (gererTouchesDebug()) {
-            debogage = !debogage;
+            enDebogage = !enDebogage;
         }
     }
 
@@ -114,15 +138,45 @@ public class Partie {
     }
 
     public static boolean getModeDebogage() {
-        return debogage;
+        return enDebogage;
+    }
+
+    public boolean getPartieEstTermine(){
+        return vaisseau.isEstMortEtSortiDeLEcran();
     }
 
     private void gererCollisions() {
         for (var entite : ENTITES) {
-            if (!vaisseau.isEstMort()) {
-                if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(vaisseau);
-                else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(vaisseau);
-            }
+            if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(vaisseau);
+            else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(vaisseau);
         }
     }
+
+    private void gererFinNiveau(double deltaTemps) {
+        final double tempsAnimationFin = 2.5;
+        if (finNiveau) opaciteFinNiveau += (1/ tempsAnimationFin) * deltaTemps;
+        opaciteFinNiveau = Math.min(1, opaciteFinNiveau);
+    }
+
+    // TODO FREEZE LORS DE LANIMATION
+    public void gererAnimationFinNiveau(GraphicsContext contexte) {
+        if (finNiveau) {
+            contexte.setFill(Color.rgb(0, 0, 0, opaciteFinNiveau));
+            contexte.fillRect(0, 0, Main.LARGEUR, Main.HAUTEUR);
+            contexte.setFill(Color.WHITE);
+            contexte.setTextAlign(TextAlignment.CENTER);
+            contexte.setTextBaseline(VPos.CENTER);
+            contexte.fillText(
+                    "Niveau " + niveauActuel + " complété",
+                    Main.LARGEUR / 2,
+                    Main.HAUTEUR / 2
+            );
+        }
+
+        if (opaciteFinNiveau == 1) {
+            niveauActuel++;
+            genererPartie();
+        }
+    }
+
 }

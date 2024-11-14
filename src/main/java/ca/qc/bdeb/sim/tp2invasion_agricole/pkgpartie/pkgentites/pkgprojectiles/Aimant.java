@@ -1,14 +1,15 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles;
 
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import javafx.scene.image.Image;
 
 public class Aimant extends Projectile {
-    private double[] posVaisseau;
+    private Vaisseau vaisseau;
 
-    public Aimant(double[] pos, double[] posVaisseau, double vitesseMax) {
+    public Aimant(double[] pos, Vaisseau vaisseau, double vitesseMax) {
         super(new double[]{0, 0}, new double[]{0, 0}, 42, 40,
                 new Image("aimant.png"), new double[]{pos[0], pos[1]}, vitesseMax);
-        this.posVaisseau = posVaisseau;
+        this.vaisseau = vaisseau;
     }
 
     // TODO FIX POSCENTRALE
@@ -18,7 +19,7 @@ public class Aimant extends Projectile {
         final double Q_VAISSEAU = -900;
 
         double[] delta = new double[2];
-        for (int i = 0; i < delta.length; i++) delta[i] = pos[i] - posVaisseau[i];
+        for (int i = 0; i < delta.length; i++) delta[i] = pos[i] - vaisseau.getPosCentre()[i];
 
         double distance = Math.sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
         //TODO VERIFIER DISTANCE * DISTANCE

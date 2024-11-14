@@ -27,9 +27,9 @@ public abstract class EntiteAbsorbable extends Entite {
     }
 
     public void gererEnlevement(Vaisseau vaisseau) {
-        estEnEnlevement = estEnCollisionAvec(vaisseau.getRayonEnlevement());
+        estEnEnlevement = !vaisseau.isEstMort() && estEnCollisionAvec(vaisseau.getRayonEnlevement());
 
-        if (estEnCollisionAvec(vaisseau)) {
+        if (!vaisseau.isEstMort() && estEnCollisionAvec(vaisseau)) {
             aSupprimer = true;
             gererAbsorptionParVaisseau(vaisseau);
         }

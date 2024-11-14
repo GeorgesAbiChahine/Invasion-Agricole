@@ -67,4 +67,9 @@ public class RayonEnlevement extends Entite {
             contexte.strokeRect(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
         }
     }
+
+    public void desactiver() {
+        DIMENSIONS[1] = 0;
+        peutEnlever = false;
+    }
 }

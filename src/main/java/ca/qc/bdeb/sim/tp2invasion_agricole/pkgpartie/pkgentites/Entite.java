@@ -38,7 +38,7 @@ public abstract class Entite {
 
     public double[] getPosCentre() {
         double[] posCentre = new double[2];
-        for (int i = 0; i < posCentre.length; i++) posCentre[i] = pos[i] + DIMENSIONS[i];
+        for (int i = 0; i < posCentre.length; i++) posCentre[i] = pos[i] + DIMENSIONS[i] / 2;
         return posCentre;
     }
 
