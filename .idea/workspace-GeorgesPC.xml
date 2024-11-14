@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8769c14b-d353-4d7d-a83c-57e58e561b29" name="Changes" comment="Changement force electrique">
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgarriereplan/Decor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgarriereplan/Decor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgentites/EntiteAvecGravite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgentites/EntiteAvecGravite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgentites/Fermier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgentites/Fermier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgentites/pkgprojectiles/Aimant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/qc/bdeb/sim/tp2invasion_agricole/pkgpartie/pkgentites/pkgprojectiles/Aimant.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TP2-Invasion_Agricole" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TP2-Invasion_Agricole" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TP2-Invasion_Agricole" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2o47vxQxXDX7liZxDr08iJquMcC" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Invasion-Agricole [:Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Invasion-Agricole [run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/2357505/OneDrive - Collège de Bois-de-Boulogne/Session 3/Programmation/TestsUnitaire&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\2357505\OneDrive - Collège de Bois-de-Boulogne\Session 3\Programmation\TP2-Invasion_Agricole\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Invasion-Agricole [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Invasion-Agricole" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Invasion-Agricole" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Invasion-Agricole [run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8769c14b-d353-4d7d-a83c-57e58e561b29" name="Changes" comment="" />
+      <created>1730117231128</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730117231128</updated>
+    </task>
+    <task id="LOCAL-00001" summary="ArrierePlan">
+      <option name="closed" value="true" />
+      <created>1730121316504</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730121316504</updated>
+    </task>
+    <task id="LOCAL-00002" summary="28 oct 10:31 J'ai fait des ajouts aux vaches et aux fermier">
+      <option name="closed" value="true" />
+      <created>1730169142769</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730169142769</updated>
+    </task>
+    <task id="LOCAL-00003" summary="28 oct 11:27 changement dans Vache, Partie, Decor">
+      <option name="closed" value="true" />
+      <created>1730172460378</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730172460378</updated>
+    </task>
+    <task id="LOCAL-00004" summary="28 oct 11:33 changement dans Aimant">
+      <option name="closed" value="true" />
+      <created>1730172832294</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730172832294</updated>
+    </task>
+    <task id="LOCAL-00005" summary="c">
+      <option name="closed" value="true" />
+      <created>1730210622376</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730210622376</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Entite (plusieurs), Partie">
+      <option name="closed" value="true" />
+      <created>1730264430636</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730264430636</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Input">
+      <option name="closed" value="true" />
+      <created>1730264677027</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1730264677027</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Gravite">
+      <option name="closed" value="true" />
+      <created>1730304690673</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730304690673</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Camera">
+      <option name="closed" value="true" />
+      <created>1730390746754</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1730390746754</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Camera">
+      <option name="closed" value="true" />
+      <created>1730422340181</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1730422340181</updated>
+    </task>
+    <task id="LOCAL-00011" summary="n">
+      <option name="closed" value="true" />
+      <created>1730431872977</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1730431872977</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Scenes">
+      <option name="closed" value="true" />
+      <created>1730440730357</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1730440730357</updated>
+    </task>
+    <task id="LOCAL-00013" summary="tableau vitesse">
+      <option name="closed" value="true" />
+      <created>1730528243963</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1730528243963</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changement force electrique">
+      <option name="closed" value="true" />
+      <created>1730771673693</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1730771673693</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ArrierePlan" />
+    <MESSAGE value="28 oct 10:31 J'ai fait des ajouts aux vaches et aux fermier" />
+    <MESSAGE value="28 oct 11:27 changement dans Vache, Partie, Decor" />
+    <MESSAGE value="28 oct 11:33 changement dans Aimant" />
+    <MESSAGE value="c" />
+    <MESSAGE value="Entite (plusieurs), Partie" />
+    <MESSAGE value="Input" />
+    <MESSAGE value="Gravite" />
+    <MESSAGE value="Camera" />
+    <MESSAGE value="n" />
+    <MESSAGE value="Scenes" />
+    <MESSAGE value="tableau vitesse" />
+    <MESSAGE value="Changement force electrique" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changement force electrique" />
+  </component>
+</project>

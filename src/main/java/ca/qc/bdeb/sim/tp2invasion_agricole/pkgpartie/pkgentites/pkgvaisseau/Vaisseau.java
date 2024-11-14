@@ -28,6 +28,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     private int nombrePoints = 0;
     private int nombrePersonnesAbsorbees = 0;
     private boolean estMort = false;
+    private boolean estMortEtSortiDeLEcran = false;
 
     public Vaisseau() {
         // Largeur 100, Hauteur 140
@@ -43,7 +44,7 @@ public class Vaisseau extends EntiteAcceleratrice {
         return nombrePoints;
     }
 
-    public boolean estInvincible() {
+    public boolean isEstInvincible() {
         return estInvincible;
     }
 
@@ -79,6 +80,12 @@ public class Vaisseau extends EntiteAcceleratrice {
 
     @Override
     public void update(double deltatemps) {
+        if (estMort) {
+            gererMort();
+            updatePosition(deltatemps);
+            return;
+        }
+
         // Gestion de l'accélération
         for (int i = 0; i < TOUCHES_DE_CONTROLE.length; i++) {
             int direction = 0;
@@ -108,16 +115,17 @@ public class Vaisseau extends EntiteAcceleratrice {
             nombreVies++;
             Input.setKeyPressed(KeyCode.W, false);
         }
-        if (Input.isKeyPressed(KeyCode.Q)){
+        if (Input.isKeyPressed(KeyCode.Q)) {
             estInvincible = !estInvincible;
-            Input.setKeyPressed(KeyCode.Q,false);
+            Input.setKeyPressed(KeyCode.Q, false);
         }
     }
 
     @Override
     protected void updatePosition(double deltatemps) {
         super.updatePosition(deltatemps);
-        pos[1] = Math.min(pos[1], HAUTEUR_MINIMALE - DIMENSIONS[1]);
+        if (!estMort)
+            pos[1] = Math.min(pos[1], HAUTEUR_MINIMALE - DIMENSIONS[1]);
     }
 
     /**
@@ -163,5 +171,28 @@ public class Vaisseau extends EntiteAcceleratrice {
 
     public void ajouterPoint() {
         nombrePoints++;
+    }
+
+    @Override
+    protected void gererLimites(int axe, double extremite) {
+        if (!estMort)
+            super.gererLimites(axe, extremite);
+    }
+
+    public boolean isEstMortEtSortiDeLEcran() {
+        return estMortEtSortiDeLEcran;
+    }
+
+    public boolean isEstMort() {
+        return estMort;
+    }
+
+    private void gererMort() {
+        v[0] = -100;
+        v[1] = 100;
+        // Lorsqu'il dépasse l'écran, on le met mort et qui dépasse l'écran
+        if (pos[1] > Main.HAUTEUR) {
+            estMortEtSortiDeLEcran = true;
+        }
     }
 }

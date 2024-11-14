@@ -119,8 +119,10 @@ public class Partie {
 
     private void gererCollisions() {
         for (var entite : ENTITES) {
-            if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(vaisseau);
-            else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(vaisseau);
+            if (!vaisseau.isEstMort()) {
+                if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(vaisseau);
+                else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(vaisseau);
+            }
         }
     }
 }

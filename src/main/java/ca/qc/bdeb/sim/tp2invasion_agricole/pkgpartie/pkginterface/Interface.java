@@ -24,8 +24,8 @@ public class Interface {
         contexte.fillText(Integer.toString(vaisseau.getNombrePoints()), 275, 45);
 
         contexte.drawImage(new Image("icone.png"), 315, 0);
-        if (vaisseau.getNombreVies() == 0) contexte.setFill(Color.RED);
-        if (vaisseau.estInvincible()) contexte.fillText(":)", 380, 45);
+        if (vaisseau.isEstMort()) contexte.setFill(Color.RED);
+        if (vaisseau.isEstInvincible()) contexte.fillText(":)", 380, 45);
         else contexte.fillText(Integer.toString(vaisseau.getNombreVies()), 380, 45);
     }
 }

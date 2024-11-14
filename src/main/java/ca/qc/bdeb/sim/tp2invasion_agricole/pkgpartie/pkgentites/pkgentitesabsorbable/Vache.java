@@ -28,7 +28,7 @@ public class Vache extends EntiteAbsorbable {
     }
 
     private void changerImageVache() {
-        if (!estEnEnlevement) image = v[0] < 0 ? vachesImages[0] : vachesImages[1];
+        if (!estEnEnlevement && v[0] != 0) image = v[0] < 0 ? vachesImages[0] : vachesImages[1];
     }
 
     @Override
