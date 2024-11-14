@@ -1,8 +1,8 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
-import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Utilitaire;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -20,14 +20,14 @@ public class Decor {
     }
 
 
-    public void dessiner(GraphicsContext contexte, Camera camera){
+    public void dessiner(GraphicsContext contexte, Camera camera) {
         contexte.setFill(Color.web("#1a1a1a"));
-        contexte.fillRect(0,0,Partie.DIMENSIONS[0],Partie.DIMENSIONS[1]);
+        contexte.fillRect(0, 0, Partie.DIMENSIONS[0], Partie.DIMENSIONS[1]);
         contexte.setFill(Color.web("#225500"));
-        contexte.fillRect(0,Partie.DIMENSIONS[1] - SOL_HAUTEUR, Partie.DIMENSIONS[0], SOL_HAUTEUR);
+        contexte.fillRect(0, Partie.DIMENSIONS[1] - SOL_HAUTEUR, Partie.DIMENSIONS[0], SOL_HAUTEUR);
 
         for (var objetsDecor : OBJETS_DECOR) {
-            objetsDecor.dessiner(contexte,camera);
+            objetsDecor.dessiner(contexte, camera);
         }
     }
 
@@ -51,7 +51,7 @@ public class Decor {
         while (x < Partie.DIMENSIONS[0]) {
             if (index % 2 == 0) {
                 OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - GRANGE_HAUTEUR,
-                        GRANGE_LARGEUR, GRANGE_HAUTEUR,new Image("grange.png")));
+                        GRANGE_LARGEUR, GRANGE_HAUTEUR, new Image("grange.png")));
             } else {
                 OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
                         TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR, new Image("tracteur.png")));

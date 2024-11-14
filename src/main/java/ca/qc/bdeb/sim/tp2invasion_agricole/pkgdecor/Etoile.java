@@ -1,4 +1,4 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,7 +8,7 @@ import javafx.scene.text.Font;
 public class Etoile extends ObjetsDecor {
     protected final String ILLUSTRATION = "*";
 
-    public Etoile(double x, double y,double taille) {
+    public Etoile(double x, double y, double taille) {
         super(x, y, taille, taille);
     }
 

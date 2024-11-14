@@ -10,12 +10,12 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 
 public class Interface {
-    private Batterie batterie = new Batterie();
-    private MiniCarte miniCarte = new MiniCarte();
+    private final Batterie BATTERIE = new Batterie();
+    private final MiniCarte MINI_CARTE = new MiniCarte();
 
     public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> entites) {
-        batterie.dessiner(contexte, vaisseau);
-        miniCarte.dessiner(contexte, vaisseau, entites);
+        BATTERIE.dessiner(contexte, vaisseau);
+        MINI_CARTE.dessiner(contexte, vaisseau, entites);
 
         contexte.drawImage(new Image("mini-vache.png"), 220, 5);
 

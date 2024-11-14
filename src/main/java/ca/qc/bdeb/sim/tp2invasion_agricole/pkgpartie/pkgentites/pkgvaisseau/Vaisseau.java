@@ -1,7 +1,7 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
-import ca.qc.bdeb.sim.tp2invasion_agricole.Input;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.EntiteAcceleratrice;
@@ -27,6 +27,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     private int nombreVies = 4;
     private int nombrePoints = 0;
     private int nombrePersonnesAbsorbees = 0;
+    private boolean estMort = false;
 
     public Vaisseau() {
         // Largeur 100, Hauteur 140
@@ -152,11 +153,12 @@ public class Vaisseau extends EntiteAcceleratrice {
 
     public void ajouterPersonneAbsorbee() {
         nombrePersonnesAbsorbees++;
-        if (nombrePersonnesAbsorbees % 2 == 0) nombreVies++;
+        if (nombrePersonnesAbsorbees % 2 == 0 && nombreVies < NB_VIES_MAX) nombreVies++;
     }
 
     public void prendDegats() {
-        if (!estInvincible) nombreVies--;
+        if (!estInvincible && !estMort) nombreVies--;
+        if (nombreVies == 0) estMort = true;
     }
 
     public void ajouterPoint() {

@@ -1,7 +1,7 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
-import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Utilitaire;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import javafx.scene.canvas.GraphicsContext;

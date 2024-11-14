@@ -19,10 +19,11 @@ public class EntiteAcceleratrice extends Entite {
         v[0] += a[0] * deltatemps;
         v[1] += a[1] * deltatemps;
 
-       regulerVitesse(0);
-       regulerVitesse(1);
+        regulerVitesse(0);
+        regulerVitesse(1);
     }
-    private void regulerVitesse(int indexVitesse){
+
+    private void regulerVitesse(int indexVitesse) {
         if (vitesseMax == 0)
             return;
 

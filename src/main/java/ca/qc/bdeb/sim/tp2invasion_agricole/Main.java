@@ -1,6 +1,7 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Input;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;

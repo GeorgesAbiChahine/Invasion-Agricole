@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 public class Aimant extends Projectile {
     private double[] posVaisseau;
+
     public Aimant(double[] pos, double[] posVaisseau, double vitesseMax) {
         super(new double[]{0, 0}, new double[]{0, 0}, 42, 40,
                 new Image("aimant.png"), new double[]{pos[0], pos[1]}, vitesseMax);
@@ -21,7 +22,7 @@ public class Aimant extends Projectile {
 
         double distance = Math.sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
         //TODO VERIFIER DISTANCE * DISTANCE
-        double forceElectrique = (Q_AIMANT * Q_VAISSEAU * K) / (distance* distance);
+        double forceElectrique = (Q_AIMANT * Q_VAISSEAU * K) / (distance * distance);
 
         // F = ma, mais m = 1. Donc, F = a
         for (int i = 0; i < delta.length; i++) a[i] = forceElectrique * (delta[i] / distance);

@@ -2,7 +2,7 @@ package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsor
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
-import ca.qc.bdeb.sim.tp2invasion_agricole.Utilitaire;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Utilitaire;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Aimant;

@@ -1,8 +1,8 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Input;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgdecor.Decor;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor.Decor;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.*;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.EntiteAbsorbable;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Fermier;

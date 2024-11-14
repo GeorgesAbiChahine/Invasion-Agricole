@@ -14,11 +14,10 @@ public abstract class Entite {
     protected final double[] DIMENSIONS;
 
     // pos[0] = x, pos[1] = y
-    protected  double[] pos = new double[2];
+    protected double[] pos = new double[2];
 
     // v[0] = vx, v[1] = vy
     protected double[] v = new double[2];
-
 
 
     public Entite(double[] v,
@@ -68,8 +67,8 @@ public abstract class Entite {
     }
 
     protected void gererLimites(int axe, double extremite) {
-        pos[axe]  = Math.min(pos[axe], extremite);
-        pos[axe]  = Math.max(axe, pos[axe]);
+        pos[axe] = Math.min(pos[axe], extremite);
+        pos[axe] = Math.max(axe, pos[axe]);
     }
 
     public boolean isASupprimer() {

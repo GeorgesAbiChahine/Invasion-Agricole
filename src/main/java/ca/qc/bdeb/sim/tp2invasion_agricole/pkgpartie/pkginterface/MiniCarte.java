@@ -15,9 +15,9 @@ public class MiniCarte {
     private double Y = 60;
     private double LARGEUR = 200;
 
-    public void dessiner(GraphicsContext contexte,Vaisseau vaisseau, ArrayList<Entite> entites){
+    public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> entites) {
         contexte.setStroke(Color.WHITE);
-        contexte.strokeLine(X,Y,LARGEUR,Y);
+        contexte.strokeLine(X, Y, LARGEUR, Y);
 
         contexte.setFill(Color.WHITE);
         for (var entite : entites) {
