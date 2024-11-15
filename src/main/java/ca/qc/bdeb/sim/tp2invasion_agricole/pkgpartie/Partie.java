@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class Partie {
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
     private int niveauActuel = 1;
-    private int nombreTotalVaches;
     private double opaciteFinNiveau = 0;
     private Decor arrierePlan = new Decor();
     private Vaisseau vaisseau = new Vaisseau();
@@ -59,7 +58,8 @@ public class Partie {
             finNiveau = true;
         }
 
-        if (vaisseau.getNombrePoints() == nombreTotalVaches) finNiveau = true;
+        if (!resteDesVaches())
+            finNiveau = true;
 
         gererDebug();
         vaisseau.update(deltaTemps);
@@ -89,7 +89,7 @@ public class Partie {
         for (int i = 0; i < nbVaches; i++) {
             vaches.add(new Vache());
         }
-        nombreTotalVaches = vaches.size();
+
         return vaches;
     }
 
@@ -150,6 +150,13 @@ public class Partie {
             if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(vaisseau);
             else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(vaisseau);
         }
+    }
+
+    private boolean resteDesVaches() {
+        for (var entite : ENTITES)
+            if (entite instanceof Vache) return true;
+
+        return false;
     }
 
     private void gererFinNiveau(double deltaTemps) {
