@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class Partie {
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
     private int niveauActuel = 1;
-    private int nombreTotalVaches;
+    private int nombreTotalVaches = 0;
     private double opaciteFinNiveau = 0;
     private Decor arrierePlan = new Decor();
     private Vaisseau vaisseau = new Vaisseau();
@@ -89,7 +89,7 @@ public class Partie {
         for (int i = 0; i < nbVaches; i++) {
             vaches.add(new Vache());
         }
-        nombreTotalVaches = vaches.size();
+        nombreTotalVaches += vaches.size();
         return vaches;
     }
 
