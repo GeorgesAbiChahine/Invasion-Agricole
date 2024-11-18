@@ -10,10 +10,11 @@ import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 
-public class MiniCarte {
-    private double X = 5;
-    private double Y = 60;
-    private double LARGEUR = 200;
+public class MiniCarte extends ObjetsInterface {
+
+    public MiniCarte(double x, double y, double LARGEUR) {
+        super(x, y, LARGEUR);
+    }
 
     public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> entites) {
         contexte.setStroke(Color.WHITE);

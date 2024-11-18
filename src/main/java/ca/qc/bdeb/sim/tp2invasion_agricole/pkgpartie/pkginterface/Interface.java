@@ -12,8 +12,8 @@ import javafx.scene.text.TextAlignment;
 import java.util.ArrayList;
 
 public class Interface {
-    private final Batterie BATTERIE = new Batterie();
-    private final MiniCarte MINI_CARTE = new MiniCarte();
+    private final Batterie BATTERIE = new Batterie(5,5,200);
+    private final MiniCarte MINI_CARTE = new MiniCarte(5,60,200);
 
     public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> entites) {
         BATTERIE.dessiner(contexte, vaisseau);
@@ -30,6 +30,20 @@ public class Interface {
 
         contexte.drawImage(new Image("icone.png"), 315, 0);
 
+        if (vaisseau.isEstMort()) contexte.setFill(Color.RED);
+        if (vaisseau.isEstInvincible()) contexte.fillText(":)", 380, 45);
+        else contexte.fillText(Integer.toString(vaisseau.getNombreVies()), 380, 45);
+    }
+
+    private void dessinerPoints(GraphicsContext contexte, Vaisseau vaisseau) {
+        contexte.drawImage(new Image("mini-vache.png"), 220, 5);
+        contexte.setFill(Color.WHITE);
+        contexte.setFont(Font.font("Arial", 45));
+        contexte.fillText(Integer.toString(vaisseau.getNombrePoints()), 275, 45);
+    }
+
+    private void dessinerVies(GraphicsContext contexte, Vaisseau vaisseau) {
+        contexte.drawImage(new Image("icone.png"), 315, 0);
         if (vaisseau.isEstMort()) contexte.setFill(Color.RED);
         if (vaisseau.isEstInvincible()) contexte.fillText(":)", 380, 45);
         else contexte.fillText(Integer.toString(vaisseau.getNombreVies()), 380, 45);

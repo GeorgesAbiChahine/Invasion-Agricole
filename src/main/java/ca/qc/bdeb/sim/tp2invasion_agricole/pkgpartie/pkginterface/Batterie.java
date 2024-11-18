@@ -6,14 +6,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class Batterie {
+public class Batterie extends ObjetsInterface{
     private final Image IMAGE = new Image("batterie.png");
-    private final double X = 5;
-    private final double Y = 5;
-    private final double LARGEUR = 200;
-    private final double HAUTEUR = 45;
+
+    public Batterie(double x, double y, double LARGEUR) {
+        super(x, y, LARGEUR);
+    }
 
     public void dessiner(GraphicsContext contexte, Vaisseau vaisseau) {
+        final double HAUTEUR = 45;
+
         contexte.setStroke(Color.YELLOW);
         contexte.strokeRect(X, Y, LARGEUR, HAUTEUR);
 

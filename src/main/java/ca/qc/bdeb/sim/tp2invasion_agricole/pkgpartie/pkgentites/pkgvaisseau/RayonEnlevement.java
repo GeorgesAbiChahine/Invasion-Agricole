@@ -9,15 +9,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 public class RayonEnlevement extends Entite {
-    private final double VITESSE_ALLONGEMENT = 150;
-    private final double VITESSE_DECHARGEMENT = 0.25;
-    private final double VITESSE_CHARGEMENT = 0.2;
     private double charge = 1;
     private boolean peutEnlever = true;
 
     public RayonEnlevement(Vaisseau vaisseau) {
         super(null, vaisseau.getDimensions()[0], 0, null, new double[]{vaisseau.getPos()[0],
                 getYRayon(vaisseau)});
+    }
+
+    protected static double getYRayon(Vaisseau vaisseau) {
+        return (vaisseau.getPos()[1] + vaisseau.getDimensions()[1] - vaisseau.getImageBase().getHeight() / 2);
     }
 
     public double getCharge() {
@@ -28,11 +29,11 @@ public class RayonEnlevement extends Entite {
         return peutEnlever;
     }
 
-    protected static double getYRayon(Vaisseau vaisseau) {
-        return (vaisseau.getPos()[1] + vaisseau.getDimensions()[1] - vaisseau.getImageBase().getHeight() / 2);
-    }
-
     protected void update(double deltaTemps, Vaisseau vaisseau) {
+        final double VITESSE_ALLONGEMENT = 150;
+        final double VITESSE_DECHARGEMENT = 0.25;
+        final double VITESSE_CHARGEMENT = 0.2;
+
         pos[0] = vaisseau.getPos()[0];
         pos[1] = getYRayon(vaisseau);
 
@@ -51,18 +52,14 @@ public class RayonEnlevement extends Entite {
             charge = 1;
             peutEnlever = true;
         }
-        if (Input.isKeyPressed(KeyCode.E)) {
-            charge = 1;
-            Input.setKeyPressed(KeyCode.E, false);
-        }
+        if (Input.isOneTimeKeyPressed(KeyCode.E)) charge = 1;
     }
 
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
         contexte.setFill(Color.rgb(255, 255, 0, 0.5));
         contexte.fillRect(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
-        //gererDessinDebogage(contexte, camera);
-        if (Partie.getModeDebogage()) {
+        if (Partie.getModeDebogage() && peutEnlever) {
             contexte.setStroke(Color.YELLOW);
             contexte.strokeRect(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
         }

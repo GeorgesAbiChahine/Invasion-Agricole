@@ -26,9 +26,7 @@ public class Decor {
         contexte.setFill(Color.web("#225500"));
         contexte.fillRect(0, Partie.DIMENSIONS[1] - SOL_HAUTEUR, Partie.DIMENSIONS[0], SOL_HAUTEUR);
 
-        for (var objetsDecor : OBJETS_DECOR) {
-            objetsDecor.dessiner(contexte, camera);
-        }
+        for (var objetsDecor : OBJETS_DECOR) objetsDecor.dessiner(contexte, camera);
     }
 
     private void ajouterEtoiles() {
@@ -41,23 +39,24 @@ public class Decor {
     }
 
     private void ajouterImagesDecors() {
-        final double GRANGE_LARGEUR = 113;
-        final double GRANGE_HAUTEUR = 147;
-        final double TRACTEUR_LARGEUR = 89;
-        final double TRACTEUR_HAUTEUR = 55;
+        final Image IMAGE_TRACTEUR = new Image("tracteur.png");
+        final Image IMAGE_GRANGE = new Image("grange.png");
 
         double x = Utilitaire.genererDouble(0, 800);
         int index = Utilitaire.genererBoolean() ? 0 : 1;
         while (x < Partie.DIMENSIONS[0]) {
             if (index % 2 == 0) {
-                OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - GRANGE_HAUTEUR,
-                        GRANGE_LARGEUR, GRANGE_HAUTEUR, new Image("grange.png")));
+                ajouterImageDansListe(IMAGE_GRANGE, x);
             } else {
-                OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - TRACTEUR_HAUTEUR,
-                        TRACTEUR_LARGEUR, TRACTEUR_HAUTEUR, new Image("tracteur.png")));
+                ajouterImageDansListe(IMAGE_TRACTEUR, x);
             }
             index++;
             x += Utilitaire.genererDouble(500, 800);
         }
+    }
+
+    private void ajouterImageDansListe(Image image, double x) {
+        OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - image.getHeight(),
+                image.getWidth(), image.getHeight(), image));
     }
 }

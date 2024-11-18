@@ -4,12 +4,12 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vais
 import javafx.scene.image.Image;
 
 public class Aimant extends Projectile {
-    private Vaisseau vaisseau;
+    private final Vaisseau VAISSEAU;
 
     public Aimant(double[] pos, Vaisseau vaisseau, double vitesseMax) {
         super(new double[]{0, 0}, new double[]{0, 0}, 42, 40,
                 new Image("aimant.png"), new double[]{pos[0], pos[1]}, vitesseMax);
-        this.vaisseau = vaisseau;
+        this.VAISSEAU = vaisseau;
     }
 
     // TODO FIX POSCENTRALE

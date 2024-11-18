@@ -1,6 +1,5 @@
 package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites;
 
-import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,10 +13,10 @@ public abstract class Entite {
     protected final double[] DIMENSIONS;
 
     // pos[0] = x, pos[1] = y
-    protected double[] pos = new double[2];
+    protected double[] pos;
 
     // v[0] = vx, v[1] = vy
-    protected double[] v = new double[2];
+    protected double[] v;
 
 
     public Entite(double[] v,
