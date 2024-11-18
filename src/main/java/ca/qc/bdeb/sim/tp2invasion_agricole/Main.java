@@ -15,14 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -101,30 +99,10 @@ public class Main extends Application {
         var root = new StackPane();
         var scene = new Scene(root, LARGEUR, HAUTEUR);
 
-        var canvas = new Canvas(LARGEUR, HAUTEUR);
-        var contexte = canvas.getGraphicsContext2D();
-        contexte.setFill(Color.web("#1a1a1a"));
-        contexte.fillRect(0, 0, LARGEUR, HAUTEUR);
-        root.getChildren().add(canvas);
+        // Gérer le fond de l'écran
+        root.setBackground(new Background(new BackgroundFill(Color.web("#1a1a1a"), null, null)));
 
-
-        HBox ligneImages = new HBox(5);
-        ligneImages.setAlignment(Pos.CENTER);
-
-        double x = 0;
-        int index = 0;
-        while (x < LARGEUR) {
-            if (index % 2 == 0) {
-                var extraterrestre = new Image("icone.png");
-                ligneImages.getChildren().add(new ImageView(extraterrestre));
-                x += extraterrestre.getWidth();
-            } else {
-                var vache = new Image("mini-vache.png");
-                ligneImages.getChildren().add(new ImageView(vache));
-                x += vache.getWidth();
-            }
-            index++;
-        }
+        HBox ligneImages = creerLigneImages();
 
         VBox vBoxTextesEtRetour = creerVBoxTextes();
 
@@ -190,10 +168,6 @@ public class Main extends Application {
 
 
     private void initialiserBoucle(GraphicsContext contexte) {
-//        if (timer != null) {
-//            timer.stop();
-//        }
-
         partie.genererPartie();
         timer = new AnimationTimer() {
             long dernierTemps = System.nanoTime();

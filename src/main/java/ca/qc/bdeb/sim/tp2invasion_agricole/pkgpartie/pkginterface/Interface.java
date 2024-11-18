@@ -19,20 +19,12 @@ public class Interface {
         BATTERIE.dessiner(contexte, vaisseau);
         MINI_CARTE.dessiner(contexte, vaisseau, entites);
 
-        contexte.drawImage(new Image("mini-vache.png"), 220, 5);
-
         contexte.setTextAlign(TextAlignment.LEFT);
         contexte.setTextBaseline(VPos.BASELINE);
 
-        contexte.setFill(Color.WHITE);
-        contexte.setFont(Font.font("Arial", 45));
-        contexte.fillText(Integer.toString(vaisseau.getNombrePoints()), 275, 45);
+        dessinerPoints(contexte, vaisseau);
 
-        contexte.drawImage(new Image("icone.png"), 315, 0);
-
-        if (vaisseau.isEstMort()) contexte.setFill(Color.RED);
-        if (vaisseau.isEstInvincible()) contexte.fillText(":)", 380, 45);
-        else contexte.fillText(Integer.toString(vaisseau.getNombreVies()), 380, 45);
+        dessinerVies(contexte, vaisseau);
     }
 
     private void dessinerPoints(GraphicsContext contexte, Vaisseau vaisseau) {

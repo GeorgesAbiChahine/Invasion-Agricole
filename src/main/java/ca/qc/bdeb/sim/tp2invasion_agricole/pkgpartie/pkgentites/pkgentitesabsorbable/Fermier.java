@@ -17,7 +17,7 @@ public class Fermier extends EntiteAbsorbable {
 
     public Fermier() {
         // Largeur : 83, Hauteur : 185.
-        super(new double[]{0, 0}, 83, 185, choisirImageAleatoire(),
+        super(null, 83, 185, choisirImageAleatoire(),
                 new double[]{Utilitaire.genererDouble(0, Partie.DIMENSIONS[0]), Partie.DIMENSIONS[1] - 185});
     }
 

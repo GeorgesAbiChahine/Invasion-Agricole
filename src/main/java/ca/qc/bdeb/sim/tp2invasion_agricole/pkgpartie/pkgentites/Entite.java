@@ -18,12 +18,10 @@ public abstract class Entite {
     // v[0] = vx, v[1] = vy
     protected double[] v;
 
-
-    public Entite(double[] v,
-                  double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
+    public Entite(double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
         this.DIMENSIONS = new double[]{LARGEUR, HAUTEUR};
         this.image = IMAGE;
-        this.v = v;
+        this.v = (v == null) ? new double[]{0, 0} : v;
         this.pos = pos;
     }
 

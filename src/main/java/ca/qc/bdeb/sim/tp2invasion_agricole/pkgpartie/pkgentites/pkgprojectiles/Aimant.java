@@ -12,17 +12,16 @@ public class Aimant extends Projectile {
         this.VAISSEAU = vaisseau;
     }
 
-    // TODO FIX POSCENTRALE
     private void calculerForceElectrique() {
         final double K = 1500;
         final double Q_AIMANT = 100;
         final double Q_VAISSEAU = -900;
 
         double[] delta = new double[2];
-        for (int i = 0; i < delta.length; i++) delta[i] = pos[i] - vaisseau.getPosCentre()[i];
+        double[] posCentre = getPosCentre();
+        for (int i = 0; i < delta.length; i++) delta[i] = posCentre[i] - VAISSEAU.getPosCentre()[i];
 
         double distance = Math.sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
-        //TODO VERIFIER DISTANCE * DISTANCE
         double forceElectrique = (Q_AIMANT * Q_VAISSEAU * K) / (distance * distance);
 
         // F = ma, mais m = 1. Donc, F = a
