@@ -40,6 +40,7 @@ public class Main extends Application {
         stage.getIcons().add(new Image("icone.png"));
         stage.show();
     }
+
     private void creerSceneIntro() {
         var root = new StackPane();
         var scene = new Scene(root, LARGEUR, HAUTEUR);
@@ -53,7 +54,7 @@ public class Main extends Application {
         var jouer = creerBouton("Jouer!", 70, event -> creerSceneJeu());
         var infos = creerBouton("Infos", 60, event -> creerSceneInfos());
 
-        vBoxBoutons.getChildren().addAll(jouer,infos);
+        vBoxBoutons.getChildren().addAll(jouer, infos);
         root.getChildren().add(vBoxBoutons);
 
         root.setOnKeyPressed(e -> {
@@ -61,6 +62,7 @@ public class Main extends Application {
         });
         stage.setScene(scene);
     }
+
     private Button creerBouton(String texte, int largeur, EventHandler<ActionEvent> action) {
         Button bouton = new Button(texte);
         bouton.setPrefSize(largeur, 30);
@@ -84,17 +86,18 @@ public class Main extends Application {
 
         stage.setScene(scene);
     }
+
     private void gererEvenements(Pane root) {
         root.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 creerSceneIntro();
                 timer.stop();
-            }
-            else Input.setKeyPressed(e.getCode(), true);
+            } else Input.setKeyPressed(e.getCode(), true);
         });
 
         root.setOnKeyReleased(e -> Input.setKeyPressed(e.getCode(), false));
     }
+
     private void creerSceneInfos() {
         var root = new StackPane();
         var scene = new Scene(root, LARGEUR, HAUTEUR);
@@ -118,6 +121,7 @@ public class Main extends Application {
         });
         stage.setScene(scene);
     }
+
     private HBox creerLigneImages() {
         HBox ligneImages = new HBox();
         ligneImages.setAlignment(Pos.CENTER);
@@ -138,6 +142,7 @@ public class Main extends Application {
 
         return ligneImages;
     }
+
     private VBox creerVBoxTextes() {
         VBox vBoxTextesEtRetour = new VBox(20);
         vBoxTextesEtRetour.setAlignment(Pos.CENTER);
@@ -161,11 +166,24 @@ public class Main extends Application {
         retourButton.setOnAction(event -> creerSceneIntro());
 
         vBoxTextesEtRetour.getChildren().addAll(titre, auteur1, auteur2, descriptionFlow, retourButton);
-
         return vBoxTextesEtRetour;
     }
 
+    private Text creerTextePourInfos(String texte, double taille) {
+        Text objetTexte = new Text(texte);
+        objetTexte.setFont(Font.font("Arial", taille));
+        objetTexte.setFill(Color.WHITE);
+        return objetTexte;
+    }
 
+    private HBox creerHBoxAuteur(String prefixe, String auteur) {
+        Text textePrefixe = creerTextePourInfos(prefixe, 20);
+        Text texteAuteur = creerTextePourInfos(auteur, 35);
+        HBox hbox = new HBox(10);
+        hbox.setAlignment(Pos.CENTER);
+        hbox.getChildren().addAll(textePrefixe, texteAuteur);
+        return hbox;
+    }
 
     private void initialiserBoucle(GraphicsContext contexte) {
         partie.genererPartie();
@@ -185,22 +203,6 @@ public class Main extends Application {
             }
         };
         timer.start();
-    }
-
-    private Text creerTextePourInfos(String texte, double taille) {
-        Text objetTexte = new Text(texte);
-        objetTexte.setFont(Font.font("Arial", taille));
-        objetTexte.setFill(Color.WHITE);
-        return objetTexte;
-    }
-
-    private HBox creerHBoxAuteur(String prefixe, String auteur) {
-        Text textePrefixe = creerTextePourInfos(prefixe, 20);
-        Text texteAuteur = creerTextePourInfos(auteur, 35);
-        HBox hbox = new HBox(10);
-        hbox.setAlignment(Pos.CENTER);
-        hbox.getChildren().addAll(textePrefixe, texteAuteur);
-        return hbox;
     }
 
     public static void main(String[] args) {

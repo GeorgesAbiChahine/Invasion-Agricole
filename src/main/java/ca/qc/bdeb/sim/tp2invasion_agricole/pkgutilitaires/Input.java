@@ -10,13 +10,14 @@ public class Input {
     public static boolean isKeyPressed(KeyCode code) {
         return TOUCHES.getOrDefault(code, false);
     }
+
+    public static void setKeyPressed(KeyCode code, Boolean isPressed) {
+        TOUCHES.put(code, isPressed);
+    }
+
     public static boolean isOneTimeKeyPressed(KeyCode code) {
         boolean touchePressee = TOUCHES.getOrDefault(code, false);
         if (touchePressee) setKeyPressed(code, false);
         return touchePressee;
-    }
-
-    public static void setKeyPressed(KeyCode code, Boolean isPressed) {
-        TOUCHES.put(code, isPressed);
     }
 }
