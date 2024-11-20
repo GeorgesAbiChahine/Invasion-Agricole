@@ -7,13 +7,27 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vais
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * La classe {@code Vache} représente une vache dans le jeu qui se déplace horizontalement dans le jeu et peut être
+ * absorbée par un vaisseau. Lorsqu'elle est absorbée, elle ajoute des points au joueur.
+ */
 public class Vache extends EntiteAbsorbable {
-    private double vitesseOriginale = v[0];
-    private final Image[] vachesImages = {new Image("vache.png"), new Image("vache-droite.png")};
 
+    /**
+     * La vitesse originale de la vache, utilisée pour restaurer sa vitesse après un échec enlèvement.
+     */
+    private double vitesseOriginale = v[0];
+    private static final Image[] VACHE_IMAGES = {new Image("vache.png"), new Image("vache-droite.png")};
+
+
+    /**
+     * Constructeur de la classe {@code Vache}.
+     * Initialise une vache avec une position et une vitesse aléatoires sur l'axe X.
+     * La vache commence par défaut sur le sol.
+     */
     public Vache() {
         super(new double[]{genererVitesseVache(), 0}, 136, 134,
-                new Image("vache.png"), new double[]{Utilitaire.genererDouble(0, Partie.DIMENSIONS[0])
+                VACHE_IMAGES[0], new double[]{Utilitaire.genererDouble(0, Partie.DIMENSIONS[0])
                         , Partie.DIMENSIONS[1] - 136});
     }
 
@@ -28,9 +42,16 @@ public class Vache extends EntiteAbsorbable {
     }
 
     private void changerImageVache() {
-        if (!estEnEnlevement && v[0] != 0) image = v[0] < 0 ? vachesImages[0] : vachesImages[1];
+        if (!estEnEnlevement && v[0] != 0) image = v[0] < 0 ? VACHE_IMAGES[0] : VACHE_IMAGES[1];
     }
 
+    /**
+     * Met à jour la position et le comportement de la vache en fonction du temps écoulé.
+     * Si la vache est en cours d'enlèvement, sa vitesse est mise à zéro.
+     * Si elle atteint les bords de l'écran, elle inverse sa direction.
+     *
+     * @param deltatemps Le temps écoulé depuis la dernière mise à jour, en secondes.
+     */
     @Override
     public void update(double deltatemps) {
         super.update(deltatemps);
@@ -43,6 +64,12 @@ public class Vache extends EntiteAbsorbable {
         }
     }
 
+    /**
+     * Gère l'absorption de la vache par le vaisseau.
+     * Lorsqu'une vache est absorbée, elle ajoute un point au score du joueur.
+     *
+     * @param vaisseau Le vaisseau qui absorbe la vache.
+     */
     @Override
     protected void gererAbsorptionParVaisseau(Vaisseau vaisseau) {
         vaisseau.ajouterPoint();

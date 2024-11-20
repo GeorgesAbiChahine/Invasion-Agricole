@@ -9,26 +9,61 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+/**
+ * La classe {@code Decor} gère les éléments graphiques fixes de l'arrière-plan dans le jeu,
+ * tels que le sol, les étoiles et les objets décoratifs (tracteurs et granges).
+ * Ces éléments ne sont pas interactifs, mais contribuent à l'ambiance visuelle du jeu.
+ */
 public class Decor {
-
+    /**
+     * Hauteur du sol, représentée en pixels.
+     */
     public final double SOL_HAUTEUR = 60;
+
+    /**
+     * Liste contenant tous les objets décoratifs à dessiner dans le décor.
+     */
     private final ArrayList<ObjetsDecor> OBJETS_DECOR = new ArrayList<>();
 
+    /**
+     * Constructeur de la classe {@code Decor}.
+     * Initialise les objets décoratifs en ajoutant des étoiles et des images spécifiques
+     * comme des tracteurs et des granges dans l'arrière-plan.
+     */
     public Decor() {
         ajouterEtoiles();
         ajouterImagesDecors();
     }
 
 
+    /**
+     * Dessine le décor sur le canvas.
+     * Cette méthode gère la couleur de fond, la représentation du sol,
+     * ainsi que tous les objets décoratifs ajoutés dans la liste {@code OBJETS_DECOR}.
+     *
+     * @param contexte Le contexte graphique où le décor sera dessiné.
+     * @param camera   La caméra utilisée pour ajuster la position des objets en fonction du déplacement.
+     */
     public void dessiner(GraphicsContext contexte, Camera camera) {
+        //Dessine le fond noir.
         contexte.setFill(Color.web("#1a1a1a"));
         contexte.fillRect(0, 0, Partie.DIMENSIONS[0], Partie.DIMENSIONS[1]);
+
+        //Dessine le sol vert.
         contexte.setFill(Color.web("#225500"));
         contexte.fillRect(0, Partie.DIMENSIONS[1] - SOL_HAUTEUR, Partie.DIMENSIONS[0], SOL_HAUTEUR);
 
+        // Dessine tous les objets décoratifs.
         for (var objetsDecor : OBJETS_DECOR) objetsDecor.dessiner(contexte, camera);
     }
 
+    /**
+     * Ajoute des étoiles dans le décor.
+     * Les étoiles sont placées aléatoirement dans la partie supérieure de l'écran.
+     * <p>
+     * Cette méthode utilise la classe {@code Utilitaire} pour générer
+     * des positions aléatoires et des tailles variées pour les étoiles.
+     */
     private void ajouterEtoiles() {
         double grandeurEtoile = Utilitaire.genererDouble(8, 15);
         for (int i = 0; i < 100; i++) {
@@ -38,6 +73,12 @@ public class Decor {
         }
     }
 
+    /**
+     * Ajoute des images décoratives telles que des tracteurs et des granges
+     * dans le décor du jeu. Ces images sont placées aléatoirement avec des
+     * intervalles variés.
+     * Les images sont générées en alternance (tracteur ou grange) le long de l'axe X.
+     */
     private void ajouterImagesDecors() {
         final Image IMAGE_TRACTEUR = new Image("tracteur.png");
         final Image IMAGE_GRANGE = new Image("grange.png");
