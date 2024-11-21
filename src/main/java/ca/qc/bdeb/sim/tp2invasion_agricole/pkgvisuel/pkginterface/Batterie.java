@@ -1,7 +1,8 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkginterface;
 
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.ObjetVisuel;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
  * dans l'interface utilisateur. Cette barre indique visuellement l'état de charge
  * du rayon d'enlèvement du vaisseau.
  */
-public class Batterie extends ObjetsInterface{
+public class Batterie extends ObjetVisuel {
 
     /**
      * L'image utilisée pour représenter l'icône de batterie.
@@ -48,7 +49,7 @@ public class Batterie extends ObjetsInterface{
 
         // Dessine le contour de la barre.
         contexte.setStroke(Color.YELLOW);
-        contexte.strokeRect(X, Y, LARGEUR, HAUTEUR);
+        contexte.strokeRect(x, y, LARGEUR, HAUTEUR);
 
         // Change la couleur de la barre en fonction de la charge.
         if (vaisseau.getRayonEnlevement().getCharge() >= 0.2) contexte.setFill(Color.YELLOW);
@@ -56,9 +57,9 @@ public class Batterie extends ObjetsInterface{
         if (!vaisseau.getRayonEnlevement().isPeutEnlever()) contexte.setFill(Color.RED);
 
         // Dessine la barre de batterie.
-        contexte.fillRect(X, Y, LARGEUR * vaisseau.getRayonEnlevement().getCharge(), HAUTEUR);
+        contexte.fillRect(x, y, LARGEUR * vaisseau.getRayonEnlevement().getCharge(), HAUTEUR);
 
         // Dessine l'icône de la batterie.
-        contexte.drawImage(IMAGE, X + 5, Y + 5);
+        contexte.drawImage(IMAGE, x + 5, y + 5);
     }
 }

@@ -1,6 +1,7 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkgdecor;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.ObjetVisuel;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -9,7 +10,7 @@ import javafx.scene.text.Font;
  * La classe {@code Etoile} représente une étoile dans le décor du jeu.
  * Ces étoiles sont dessinées comme des symboles textuels (*) avec une taille et une position spécifiques.
  */
-public class Etoile extends ObjetsDecor {
+public class Etoile extends ObjetDecor {
     /**
      * Caractère utilisé pour représenter l'étoile.
      */
@@ -23,7 +24,7 @@ public class Etoile extends ObjetsDecor {
      * @param taille La taille de l'étoile (utilisée pour définir sa largeur et hauteur).
      */
     public Etoile(double x, double y, double taille) {
-        super(x, y, taille, taille);
+        super(x, y, taille);
     }
 
     /**
@@ -32,7 +33,6 @@ public class Etoile extends ObjetsDecor {
      * @param contexte Le contexte graphique où l'étoile sera dessinée.
      * @param camera   La caméra utilisée pour ajuster la position de l'étoile en fonction du défilement.
      */
-    //TODO Largeur pour taille est bizarre
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
         // Définit la police de l'étoile avec une taille correspondant à sa largeur.

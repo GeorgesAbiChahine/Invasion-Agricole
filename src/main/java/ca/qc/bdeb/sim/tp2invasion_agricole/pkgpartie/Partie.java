@@ -2,14 +2,14 @@ package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgutilitaires.Input;
 import ca.qc.bdeb.sim.tp2invasion_agricole.Main;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor.Decor;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkgdecor.Decor;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.*;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.EntiteAbsorbable;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Fermier;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Vache;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgprojectiles.Projectile;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface.Interface;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkginterface.Interface;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -22,7 +22,10 @@ import java.util.ArrayList;
 public class Partie {
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
     private final Vaisseau VAISSEAU = new Vaisseau();
-    private final ArrayList<Entite> ENTITES = new ArrayList<>();
+    private final ArrayList<Entite> VACHES = new ArrayList<>();
+    private final ArrayList<Entite> FERMIERS = new ArrayList<>();
+    private final ArrayList<Entite> PROJECTILES = new ArrayList<>();
+    private final ArrayList<ArrayList<Entite>> ENTITES = new ArrayList<>();
 
     private static boolean enDebogage = false;
     private int niveauActuel = 1;
@@ -41,7 +44,6 @@ public class Partie {
         finNiveau = false;
         arrierePlan = new Decor();
         VAISSEAU.reinitialiserPosition();
-        ENTITES.clear();
         camera = new Camera();
         interfaceDuNiveau = new Interface();
         genererEntites();
@@ -51,7 +53,7 @@ public class Partie {
         arrierePlan.dessiner(contexte, camera);
         VAISSEAU.dessiner(contexte, camera);
         dessinerEntites(contexte);
-        interfaceDuNiveau.dessiner(contexte, VAISSEAU, ENTITES);
+        interfaceDuNiveau.dessiner(contexte, VAISSEAU, VACHES);
         gererAnimationFinNiveau(contexte);
     }
 
@@ -67,49 +69,58 @@ public class Partie {
     }
 
     private void genererEntites() {
-        ENTITES.addAll(genererFermiers());
-        ENTITES.addAll(genererVaches());
+        ENTITES.clear();
+        ENTITES.add(FERMIERS);
+        ENTITES.add(VACHES);
+        ENTITES.add(PROJECTILES);
+
+        genererVaches();
+        genererFermiers();
     }
 
-    private ArrayList<Fermier> genererFermiers() {
-        ArrayList<Fermier> fermiers = new ArrayList<>();
+
+    private void genererFermiers() {
+        FERMIERS.clear();
         int nbFermiers = 3 + 3 * (niveauActuel - 1);
-        for (int i = 0; i < nbFermiers; i++) fermiers.add(new Fermier());
-        return fermiers;
+        for (int i = 0; i < nbFermiers; i++) FERMIERS.add(new Fermier());
     }
 
-    private ArrayList<Vache> genererVaches() {
-        ArrayList<Vache> vaches = new ArrayList<>();
+    private void genererVaches() {
+        VACHES.clear();
         int nbVaches = 5 + 2 * niveauActuel;
-        for (int i = 0; i < nbVaches; i++) vaches.add(new Vache());
-        return vaches;
+        for (int i = 0; i < nbVaches; i++) VACHES.add(new Vache());
     }
 
     private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps) {
         Projectile projectile = fermier.tenterCreerProjectile(camera, VAISSEAU, deltaTemps);
-        if (projectile != null) ENTITES.add(projectile);
+        if (projectile != null) PROJECTILES.add(projectile);
     }
 
     private void updateEntites(double deltaTemps) {
-        for (int i = 0; i < ENTITES.size(); i++) {
-            // Update tout
-            ENTITES.get(i).update(deltaTemps);
+        for (var sousListeEntite : ENTITES) {
+            for (int i = 0; i < sousListeEntite.size(); i++) {
+                // Update tout
+                sousListeEntite.get(i).update(deltaTemps);
 
-            // Update les projectiles
-            if (ENTITES.get(i) instanceof Fermier fermier) {
-                tenterGenererProjectiles(fermier, deltaTemps);
+                // Update les projectiles
+                if (sousListeEntite.get(i) instanceof Fermier fermier) {
+                    tenterGenererProjectiles(fermier, deltaTemps);
+                }
+
+                // Update les éléments à supprimer
+                if (sousListeEntite.get(i).isASupprimer()) {
+                    sousListeEntite.remove(i);
+                    i--;
+                }
             }
 
-            // Update les éléments à supprimer
-            if (ENTITES.get(i).isASupprimer()) {
-                ENTITES.remove(i);
-                i--;
-            }
         }
     }
 
     private void dessinerEntites(GraphicsContext contexte) {
-        for (var entite : ENTITES) entite.dessiner(contexte, camera);
+        for (var sousListeEntite : ENTITES) {
+            for (var entite : sousListeEntite) entite.dessiner(contexte, camera);
+        }
     }
 
     private void gererDebug() {
@@ -121,15 +132,16 @@ public class Partie {
     }
 
     private void gererCollisions() {
-        for (var entite : ENTITES) {
-            if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(VAISSEAU);
-            else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(VAISSEAU);
+        for (var sousListeEntite : ENTITES) {
+            for (var entite : sousListeEntite) {
+                if (entite instanceof EntiteAbsorbable entiteAbsorbable) entiteAbsorbable.gererEnlevement(VAISSEAU);
+                else if (entite instanceof Projectile projectile) projectile.gererAttaqueSurVaisseau(VAISSEAU);
+            }
         }
     }
 
     private boolean resteDesVaches() {
-        for (var entite : ENTITES) if (entite instanceof Vache) return true;
-        return false;
+        return (!VACHES.isEmpty());
     }
 
     private boolean gererFinNiveau(double deltaTemps) {

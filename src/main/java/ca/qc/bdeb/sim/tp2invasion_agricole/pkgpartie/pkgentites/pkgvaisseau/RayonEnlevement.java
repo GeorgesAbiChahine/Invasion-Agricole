@@ -78,14 +78,11 @@ public class RayonEnlevement extends Entite {
             DIMENSIONS[1] = 0;
             charge += VITESSE_CHARGEMENT * deltaTemps;
         }
-        if (charge <= 0) {
-            peutEnlever = false;
-            charge = 0;
-        }
-        if (charge >= 1 || Input.isOneTimeKeyPressed(KeyCode.E)) {
-            charge = 1;
-            peutEnlever = true;
-        }
+
+        if (charge <= 0) desactiver();
+
+        if (charge >= 1 || Input.isOneTimeKeyPressed(KeyCode.E)) reactiver();
+
     }
 
     /**
@@ -101,11 +98,12 @@ public class RayonEnlevement extends Entite {
         contexte.setFill(Color.rgb(255, 255, 0, 0.5));
         contexte.fillRect(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
 
-        //TODO VOIR SI ON DOIT OVVERRIDE GERERENMODEDEBOGAGE  (MARCHE PAS FOR SOME REASON)
-        if (Partie.getModeDebogage() && peutEnlever) {
-            contexte.setStroke(Color.YELLOW);
-            contexte.strokeRect(camera.getXEcran(pos[0]), pos[1], DIMENSIONS[0], DIMENSIONS[1]);
-        }
+        gererDessinDebogage(contexte, camera);
+    }
+
+    @Override
+    public void gererDessinDebogage(GraphicsContext contexte, Camera camera) {
+        if (peutEnlever) super.gererDessinDebogage(contexte, camera);
     }
 
     /**
@@ -115,5 +113,13 @@ public class RayonEnlevement extends Entite {
         DIMENSIONS[1] = 0;
         charge = 0;
         peutEnlever = false;
+    }
+
+    /**
+     * Réactive le rayon lorsque la batterie du vaisseau est rechargé.
+     */
+    private void reactiver() {
+        charge = 1;
+        peutEnlever = true;
     }
 }

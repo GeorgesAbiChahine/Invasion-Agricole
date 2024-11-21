@@ -26,8 +26,6 @@ public abstract class Projectile extends EntiteAcceleratrice {
         super(a, v, LARGEUR, HAUTEUR, IMAGE, pos, vitesseMax);
     }
 
-
-    //TODO VOIR SI ON DOIT FAIRE UNE CLASSE POUR CETTE METHODE!!! ProjectileAvecMagnitude??
     /**
      * Calcule la vitesse requise pour diriger un projectile vers une position cible.
      * La méthode utilise la distance entre la position actuelle et la cible pour normaliser

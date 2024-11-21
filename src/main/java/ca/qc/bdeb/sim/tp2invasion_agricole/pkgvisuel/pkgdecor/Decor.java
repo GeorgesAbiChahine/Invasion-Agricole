@@ -1,4 +1,4 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkgdecor;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
@@ -23,7 +23,7 @@ public class Decor {
     /**
      * Liste contenant tous les objets décoratifs à dessiner dans le décor.
      */
-    private final ArrayList<ObjetsDecor> OBJETS_DECOR = new ArrayList<>();
+    private final ArrayList<ObjetDecor> OBJETS_DECOR = new ArrayList<>();
 
     /**
      * Constructeur de la classe {@code Decor}.

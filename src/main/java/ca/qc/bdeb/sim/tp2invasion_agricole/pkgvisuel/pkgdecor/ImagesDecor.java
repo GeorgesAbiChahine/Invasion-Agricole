@@ -1,6 +1,7 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgdecor;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkgdecor;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Camera;
+import ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.ObjetVisuel;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -10,7 +11,8 @@ import javafx.scene.image.Image;
  * Elle hérite de la classe {@code ObjetsDecor} et utilise les propriétés de position
  * et de dimension pour dessiner une image.
  */
-public class ImagesDecor extends ObjetsDecor {
+public class ImagesDecor extends ObjetDecor {
+    private final double HAUTEUR;
     protected Image image;
 
     /**
@@ -22,7 +24,8 @@ public class ImagesDecor extends ObjetsDecor {
      * @param image L'image à afficher pour cet objet décoratif.
      */
     public ImagesDecor(double x, double y, double l, double h, Image image) {
-        super(x, y, l, h);
+        super(x, y, l);
+        this.HAUTEUR = h;
         this.image = image;
     }
 

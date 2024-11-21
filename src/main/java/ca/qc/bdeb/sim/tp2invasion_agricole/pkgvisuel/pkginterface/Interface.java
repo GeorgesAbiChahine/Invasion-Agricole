@@ -1,4 +1,4 @@
-package ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkginterface;
+package ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkginterface;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
@@ -33,11 +33,11 @@ public class Interface {
      *
      * @param contexte Le contexte graphique où l'interface sera dessinée.
      * @param vaisseau Le vaisseau dont les informations (batterie, points, vies) sont affichées.
-     * @param entites  La liste des entités présentes sur le terrain, utilisée pour la mini-carte.
+     * @param vaches  La liste des vaches présentes sur le terrain, utilisée pour la mini-carte.
      */
-    public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> entites) {
+    public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> vaches) {
         BATTERIE.dessiner(contexte, vaisseau);
-        MINI_CARTE.dessiner(contexte, vaisseau, entites);
+        MINI_CARTE.dessiner(contexte, vaisseau, vaches);
 
         contexte.setTextAlign(TextAlignment.LEFT);
         contexte.setTextBaseline(VPos.BASELINE);
@@ -59,7 +59,7 @@ public class Interface {
         contexte.drawImage(new Image("mini-vache.png"), 220, 5);
         contexte.setFill(Color.WHITE);
         contexte.setFont(Font.font("Arial", 45));
-        contexte.fillText(Integer.toString(vaisseau.getNombrePoints()), 275, 45);
+        contexte.fillText(Integer.toString(vaisseau.getNombrePoints()), 260, 45);
     }
 
 
@@ -73,9 +73,11 @@ public class Interface {
      * @param vaisseau Le vaisseau dont le nombre de vies est à afficher.
      */
     private void dessinerVies(GraphicsContext contexte, Vaisseau vaisseau) {
-        contexte.drawImage(new Image("icone.png"), 315, 0);
+        final double X_VIE = 395;
+        final double Y_VIE = 45;
+        contexte.drawImage(new Image("icone.png"), 330, 0);
         if (vaisseau.isEstMort()) contexte.setFill(Color.RED);
-        if (vaisseau.isEstInvincible()) contexte.fillText(":)", 380, 45);
-        else contexte.fillText(Integer.toString(vaisseau.getNombreVies()), 380, 45);
+        if (vaisseau.isEstInvincible()) contexte.fillText(":)", X_VIE, Y_VIE);
+        else contexte.fillText(Integer.toString(vaisseau.getNombreVies()), X_VIE, Y_VIE);
     }
 }
