@@ -31,9 +31,9 @@ public abstract class Projectile extends EntiteAcceleratrice {
      * La méthode utilise la distance entre la position actuelle et la cible pour normaliser
      * la direction et applique une magnitude définie.
      *
-     * @param pos          La position actuelle du projectile (tableau de composantes X et Y).
-     * @param posVaisseau  La position cible (tableau de composantes X et Y).
-     * @param magnitude    La magnitude de la vitesse.
+     * @param pos         La position actuelle du projectile (tableau de composantes X et Y).
+     * @param posVaisseau La position cible (tableau de composantes X et Y).
+     * @param magnitude   La magnitude de la vitesse.
      * @return Un tableau contenant les composantes X et Y de la vitesse calculée.
      */
     protected static double[] calculerV(double[] pos, double[] posVaisseau, int magnitude) {

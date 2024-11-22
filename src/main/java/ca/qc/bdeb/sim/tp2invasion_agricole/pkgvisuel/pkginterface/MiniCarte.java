@@ -2,7 +2,6 @@ package ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.pkginterface;
 
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.Partie;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.Entite;
-import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgentitesabsorbable.Vache;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vaisseau;
 import ca.qc.bdeb.sim.tp2invasion_agricole.pkgvisuel.ObjetVisuel;
 import javafx.scene.canvas.GraphicsContext;

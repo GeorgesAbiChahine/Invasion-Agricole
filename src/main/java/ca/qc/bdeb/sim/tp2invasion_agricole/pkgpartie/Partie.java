@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 
 /**
- * Représente une partie du jeu "Invasion Agricole".
+ * La classe {@code Partie} représente une partie du jeu "Invasion Agricole".
  * Cette classe gère le déroulement d'un niveau, y compris la génération des entités,
  * les mises à jour des états, les collisions, et l'affichage graphique.
- * C'est la classe "Modèle".
+ * C'est le modèle dans le MVC.
  */
 public class Partie {
     // Dimensions du niveau, à ne pas confondre avec les dimensions du Canvas
@@ -68,7 +68,7 @@ public class Partie {
      * Dessine l'arrière-plan, le vaisseau, les entités, et l'interface sur le contexte graphique.
      * Si une animation de fin de niveau est en cours, elle est également dessinée.
      *
-     * @param contexte Le contexte graphique sur lequel dessiner.
+     * @param contexte Le contexte graphique où le décor sera dessiné.
      */
     public void dessiner(GraphicsContext contexte) {
         arrierePlan.dessiner(contexte, camera);
@@ -96,10 +96,6 @@ public class Partie {
         gererCollisions();
     }
 
-    /**
-     * Génère les entités du niveau, incluant les vaches et les fermiers.
-     * Rassemble toutes les listes d'entités différentes dans une seule lite entité générale
-     */
     private void genererEntites() {
         ENTITES.clear();
         ENTITES.add(FERMIERS);
@@ -110,18 +106,12 @@ public class Partie {
         genererFermiers();
     }
 
-    /**
-     * Génère un nombre de fermiers basé sur le niveau actuel.
-     */
     private void genererFermiers() {
         FERMIERS.clear();
         int nbFermiers = 3 + 3 * (niveauActuel - 1);
         for (int i = 0; i < nbFermiers; i++) FERMIERS.add(new Fermier());
     }
 
-    /**
-     * Génère un nombre de vaches basé sur le niveau actuel.
-     */
     private void genererVaches() {
         VACHES.clear();
         int nbVaches = 5 + 2 * niveauActuel;
@@ -167,20 +157,39 @@ public class Partie {
         }
     }
 
+    /**
+     * Dessine toutes les entités présentes dans le niveau sur le contexte graphique.
+     *
+     * @param contexte Le contexte graphique sur lequel dessiner.
+     */
     private void dessinerEntites(GraphicsContext contexte) {
         for (var sousListeEntite : ENTITES) {
             for (var entite : sousListeEntite) entite.dessiner(contexte, camera);
         }
     }
 
+    /**
+     * Gère l'activation ou la désactivation du mode débogage.
+     * Le mode débogage peut être activé/désactivé en appuyant sur la touche "D".
+     */
     private void gererDebug() {
         if (Input.isOneTimeKeyPressed(KeyCode.D)) enDebogage = !enDebogage;
     }
 
+    /**
+     * Vérifie si la partie est terminée, c'est-à-dire si le vaisseau est mort et sorti de l'écran.
+     *
+     * @return {@code true} si la partie est terminée, {@code false} sinon.
+     */
     public boolean getPartieEstTermine() {
         return VAISSEAU.isEstMortEtSortiDeLEcran();
     }
 
+    /**
+     * Gère les collisions entre le vaisseau et les différentes entités.
+     * Les entités absorbables peuvent être enlevées par le vaisseau,
+     * tandis que les projectiles peuvent infliger des dégâts au vaisseau.
+     */
     private void gererCollisions() {
         for (var sousListeEntite : ENTITES) {
             for (var entite : sousListeEntite) {
@@ -194,6 +203,14 @@ public class Partie {
         return (!VACHES.isEmpty());
     }
 
+    /**
+     * Gère la transition de fin de niveau.
+     * Augmente l'opacité de l'animation de fin de niveau jusqu'à 1, et déclenche la génération
+     * d'une nouvelle partie lorsque l'animation est terminée.
+     *
+     * @param deltaTemps Le temps écoulé depuis la dernière mise à jour, en secondes.
+     * @return {@code true} si la fin de niveau est en cours, {@code false} sinon.
+     */
     private boolean gererFinNiveau(double deltaTemps) {
         final double tempsAnimationFin = 2.5;
         if (finNiveau) {
@@ -203,6 +220,13 @@ public class Partie {
         } else return false;
     }
 
+    /**
+     * Gère l'animation visuelle de la fin de niveau.
+     * Affiche un écran de transition avec un texte indiquant que le niveau a été complété.
+     * Une fois l'animation terminée, un nouveau niveau est généré.
+     *
+     * @param contexte Le contexte graphique sur lequel dessiner l'animation.
+     */
     public void gererAnimationFinNiveau(GraphicsContext contexte) {
         if (finNiveau) {
             contexte.setFill(Color.rgb(0, 0, 0, opaciteFinNiveau));

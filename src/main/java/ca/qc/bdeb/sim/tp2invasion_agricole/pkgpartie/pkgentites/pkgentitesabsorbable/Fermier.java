@@ -18,13 +18,13 @@ import javafx.scene.image.Image;
  * Les fermiers ont des comportements aléatoires en termes de projectiles et d'apparence.
  */
 public class Fermier extends EntiteAbsorbable {
+    private static final Image[] FERMIER_IMAGES = {new Image("fermier.png"), new Image("fermiere.png")};
+
     /**
      * Temps écoulé depuis le dernier lancement d'un projectile.
      * Une fois que ce temps atteint 2 secondes, le fermier peut lancer un projectile.
      */
     private double tempsPourLancer = Utilitaire.genererDouble(0, 2);
-    private static final Image[] FERMIER_IMAGES = {new Image("fermier.png"), new Image("fermiere.png")};
-
 
     /**
      * Constructeur de la classe {@code Fermier}.

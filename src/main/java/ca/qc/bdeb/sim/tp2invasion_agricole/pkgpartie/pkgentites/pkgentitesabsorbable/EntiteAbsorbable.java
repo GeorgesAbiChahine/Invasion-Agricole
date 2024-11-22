@@ -16,8 +16,6 @@ public abstract class EntiteAbsorbable extends Entite {
      */
     protected boolean estEnEnlevement = false;
 
-
-
     /**
      * Constructeur de la classe {@code EntiteAbsorbable}.
      *

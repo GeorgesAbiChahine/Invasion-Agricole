@@ -12,13 +12,12 @@ import javafx.scene.image.Image;
  * absorbée par un vaisseau. Lorsqu'elle est absorbée, elle ajoute des points au joueur.
  */
 public class Vache extends EntiteAbsorbable {
+    private static final Image[] VACHE_IMAGES = {new Image("vache.png"), new Image("vache-droite.png")};
 
     /**
      * La vitesse originale de la vache, utilisée pour restaurer sa vitesse après un échec enlèvement.
      */
     private double vitesseOriginale = v[0];
-    private static final Image[] VACHE_IMAGES = {new Image("vache.png"), new Image("vache-droite.png")};
-
 
     /**
      * Constructeur de la classe {@code Vache}.

@@ -11,9 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
+
 /**
- * Classe représentant le vaisseau contrôlé par le joueur.
- * Hérite de {@link EntiteAcceleratrice}.
+ * La classe {@code Vaisseau} représente le vaisseau contrôlé par le joueur.
+ * Elle gère les mouvements du vaisseau, l'absorption des entités, ainsi que les événements de vie ou de mort du joueur.
  */
 public class Vaisseau extends EntiteAcceleratrice {
 
@@ -24,8 +25,8 @@ public class Vaisseau extends EntiteAcceleratrice {
     public final double EXTREMITE_GAUCHE = (Main.LARGEUR * 0.3);
     // Séparé en deux pour dimensions horizontale et verticale, puis en encore en deux pour la direction (+, -)
     private final KeyCode[][] TOUCHES_DE_CONTROLE = {{KeyCode.RIGHT, KeyCode.LEFT}, {KeyCode.DOWN, KeyCode.UP}};
-    private Image imageBase = new Image("base-vaisseau-off.png");
 
+    private Image imageBase = new Image("base-vaisseau-off.png");
     private final RayonEnlevement RAYON_ENLEVEMENT = new RayonEnlevement(this);
     private final int NB_VIES_MAX = 4;
 
@@ -37,7 +38,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     private boolean estMortEtSortiDeLEcran = false;
 
     /**
-     * Constructeur du vaisseau initialisant sa position, son image et ses paramètres.
+     * Constructeur de la classe {@code Vaisseau}.
      */
     public Vaisseau() {
         // Note : largeur = 100
@@ -87,20 +88,13 @@ public class Vaisseau extends EntiteAcceleratrice {
         return imageBase;
     }
 
-    /**
-     * Obtient la direction de la vitesse.
-     *
-     * @param v La vitesse à évaluer.
-     * @return 1 si positif, -1 si négatif, 0 si nul.
-     */
-    private int getDirection(double v) {
-        if (v == 0) return 0;
-        return ((v > 0) ? 1 : -1);
+    public RayonEnlevement getRayonEnlevement() {
+        return RAYON_ENLEVEMENT;
     }
 
     /**
      * Réinitialise la position du vaisseau à sa position de départ, et remet sa vitesse et son accélération à 0.
-     * Relache les touches de mouvement pour éviter un bug, où si la touche n'est pas relachée avant la fin de la
+     * Relache les touches de mouvement pour éviter un bug, où si la touche n'est pas relâchée avant la fin de la
      * mort du vaisseau, le programme garde la touche comme pressée même si ce n'est plus le cas.
      */
     public void reinitialiser() {
@@ -113,6 +107,18 @@ public class Vaisseau extends EntiteAcceleratrice {
         }
         pos = initialiserPosition();
     }
+
+    /**
+     * Obtient la direction de la vitesse.
+     *
+     * @param v La vitesse à évaluer.
+     * @return 1 si positif, -1 si négatif, 0 si nul.
+     */
+    private int getDirection(double v) {
+        if (v == 0) return 0;
+        return ((v > 0) ? 1 : -1);
+    }
+
 
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
@@ -197,7 +203,7 @@ public class Vaisseau extends EntiteAcceleratrice {
      *
      * @param indexAcceleration 0 pour l'axe X, 1 pour l'axe Y.
      * @param multiplicateur    -1 pour une direction négative, 1 pour une direction positive,
-     *                           ou 0 si aucune touche n'est pressée.
+     *                          ou 0 si aucune touche n'est pressée.
      */
     private void gererChangementsAcceleration(int indexAcceleration, int multiplicateur) {
         final double RALENTISSEMENT = -500;
@@ -210,15 +216,6 @@ public class Vaisseau extends EntiteAcceleratrice {
             int directionVitesse = getDirection(vitesse);
             a[indexAcceleration] = directionVitesse * RALENTISSEMENT;
         }
-    }
-
-    /**
-     * Retourne le rayon d'enlèvement associé au vaisseau.
-     *
-     * @return L'objet {@link RayonEnlevement} lié à ce vaisseau.
-     */
-    public RayonEnlevement getRayonEnlevement() {
-        return RAYON_ENLEVEMENT;
     }
 
     /**
@@ -241,7 +238,7 @@ public class Vaisseau extends EntiteAcceleratrice {
     }
 
     /**
-     * Augmente le score du vaisseau en ajoutant un point au compteur de points, appelée lorsqu'une vache est absorbée
+     * Augmente le score du vaisseau en ajoutant un point au compteur de points, appelée lorsqu'une vache est absorbée.
      */
     public void ajouterPoint() {
         nombrePoints++;
