@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
  * Elle gère les mouvements du vaisseau, l'absorption des entités, ainsi que les événements de vie ou de mort du joueur.
  */
 public class Vaisseau extends EntiteAcceleratrice {
-
+    // Constante utilisée par le constructeur et pour calculer la position initiale
     private final static int LARGEUR_VAISSEAU = 100;
     private final double ACCELERATION_BASE = 2000;
     private final double HAUTEUR_MINIMALE = Partie.DIMENSIONS[1] * 0.6;
