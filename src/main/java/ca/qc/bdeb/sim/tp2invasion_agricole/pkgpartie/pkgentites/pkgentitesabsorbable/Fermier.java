@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
  * Les fermiers ont des comportements aléatoires en termes de projectiles et d'apparence.
  */
 public class Fermier extends EntiteAbsorbable {
-    private static final Image[] FERMIER_IMAGES = {new Image("fermier.png"), new Image("fermiere.png")};
+    private static final Image[] IMAGES_FERMIERS = {new Image("fermier.png"), new Image("fermiere.png")};
 
     /**
      * Temps écoulé depuis le dernier lancement d'un projectile.
@@ -43,24 +43,17 @@ public class Fermier extends EntiteAbsorbable {
      * @return Une instance de {@code Image} représentant le fermier.
      */
     private static Image choisirImageAleatoire() {
-        return Utilitaire.genererBoolean() ? FERMIER_IMAGES[0] : FERMIER_IMAGES[1];
+        return Utilitaire.genererBoolean() ? IMAGES_FERMIERS[0] : IMAGES_FERMIERS[1];
     }
 
     /**
-     * Permet au fermier de tenter de créer un projectile pour attaquer le joueur.
-     * <p>
-     * Le fermier ne peut lancer un projectile que si :
-     * <p>
-     * - Il est visible à l'écran (dans la portée de la caméra).
-     * <p>
-     * - Au moins 2 secondes se sont écoulées depuis le dernier projectile lancé.
-     * <p>
-     * Les projectiles sont choisis aléatoirement parmi trois types :
-     * <p>
-     * - Aimant
-     * <p>
-     * - Girouette
-     * <p>
+     * Permet au fermier de tenter de créer un projectile pour attaquer le joueur.<p>
+     * Le fermier ne peut lancer un projectile que si :<p>
+     * - Il est visible à l'écran (dans la portée de la caméra).<p>
+     * - Au moins 2 secondes se sont écoulées depuis le dernier projectile lancé.<p>
+     * Les projectiles sont choisis aléatoirement parmi trois types :<p>
+     * - Aimant <p>
+     * - Girouette<p>
      * - Pot de fleur
      *
      * @param camera     La caméra permettant de déterminer si le fermier est visible à l'écran.

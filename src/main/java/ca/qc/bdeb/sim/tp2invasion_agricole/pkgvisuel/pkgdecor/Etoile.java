@@ -10,9 +10,6 @@ import javafx.scene.text.Font;
  * Ces étoiles sont dessinées comme des symboles textuels (*) avec une taille et une position spécifiques.
  */
 public class Etoile extends ObjetDecor {
-    /**
-     * Caractère utilisé pour représenter l'étoile.
-     */
     protected final String ILLUSTRATION = "*";
 
     /**

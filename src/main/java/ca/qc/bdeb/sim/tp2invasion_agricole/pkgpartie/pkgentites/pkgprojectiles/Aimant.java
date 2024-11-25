@@ -45,16 +45,9 @@ public class Aimant extends Projectile {
         for (int i = 0; i < delta.length; i++) a[i] = forceElectrique * (delta[i] / distance);
     }
 
-    /**
-     * Met à jour la position et le comportement de l'aimant.
-     * Cette méthode appelle {@code calculerForceElectrique()} pour ajuster l'accélération
-     * en fonction de la distance et des charges entre l'aimant et le vaisseau.
-     *
-     * @param deltatemps Le temps écoulé depuis la dernière mise à jour, en secondes.
-     */
     @Override
     public void update(double deltatemps) {
         super.update(deltatemps);
-        calculerForceElectrique();
+        calculerForceElectrique(); // Change l'accélération de l'aimant
     }
 }

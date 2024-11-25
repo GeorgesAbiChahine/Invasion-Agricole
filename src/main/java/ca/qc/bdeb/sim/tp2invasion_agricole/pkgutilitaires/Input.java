@@ -11,28 +11,12 @@ import java.util.HashMap;
  */
 public class Input {
 
-    /**
-     * Une map contenant l'état des touches clavier.
-     * Chaque touche est associée à un booléen indiquant si elle est actuellement appuyée.
-     */
     private static final HashMap<KeyCode, Boolean> TOUCHES = new HashMap<>();
 
-    /**
-     * Vérifie si une touche spécifique est actuellement appuyée.
-     *
-     * @param code Le code de la touche à vérifier.
-     * @return {@code true} si la touche est appuyée, sinon {@code false}.
-     */
     public static boolean isKeyPressed(KeyCode code) {
         return TOUCHES.getOrDefault(code, false);
     }
 
-    /**
-     * Met à jour l'état d'une touche dans la map.
-     *
-     * @param code      Le code de la touche à mettre à jour.
-     * @param isPressed {@code true} si la touche est appuyée, {@code false} sinon.
-     */
     public static void setKeyPressed(KeyCode code, Boolean isPressed) {
         TOUCHES.put(code, isPressed);
     }

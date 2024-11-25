@@ -4,8 +4,8 @@ import ca.qc.bdeb.sim.tp2invasion_agricole.pkgpartie.pkgentites.pkgvaisseau.Vais
 import javafx.scene.image.Image;
 
 /**
- * La classe {@code PotDeFleur} représente un projectile qui se déplace en direction
- * du vaisseau cible, avec une vitesse initiale calculée pour atteindre une position
+ * La classe {@code PotDeFleur} représente un projectile qui subit la gravité,
+ * avec une vitesse initiale calculée pour atteindre une position
  * légèrement décalée au-dessus du centre du vaisseau avec une magnitude totale de 1000.
  */
 public class PotDeFleur extends Projectile {
@@ -23,6 +23,4 @@ public class PotDeFleur extends Projectile {
                         vaisseau.getPosCentre()[1] - 400}, 1000), 31, 61,
                 new Image("pot-de-fleurs.png"), new double[]{pos[0], pos[1]}, 0);
     }
-
-
 }

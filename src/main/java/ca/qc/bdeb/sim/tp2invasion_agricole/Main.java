@@ -43,19 +43,14 @@ import javafx.stage.Stage;
  *     <li>La <b>scène de jeu</b>, où le jeu se déroule.</li>
  *     <li>L’<b>écran d’information</b>, qui présente les crédits du TP.</li>
  * </ul>
- *
+ * <p>
  * La classe {@code Main} sert d'interface qui sert à afficher les différentes scène du jeu (intro,infos, et le jeu).
  * C'est la vue du MVC.
  */
-public class Main extends Application {
-    /**
-     * Largeur de la fenêtre principale.
-     */
-    public final static int LARGEUR = 900;
 
-    /**
-     * Hauteur de la fenêtre principale.
-     */
+public class Main extends Application {
+
+    public final static int LARGEUR = 900;
     public final static int HAUTEUR = 520;
 
     private Partie partie;
@@ -267,7 +262,7 @@ public class Main extends Application {
      * Crée un objet texte stylisé avec une police Arial et une couleur blanche.
      * Cette méthode est utilisée pour créer les différents textes dans la scène d'informations.
      *
-     * @param texte Le contenu textuel.
+     * @param texte  Le contenu textuel.
      * @param taille La taille de la police.
      * @return Un objet {@code Text} configuré.
      */
@@ -282,7 +277,7 @@ public class Main extends Application {
      * Crée un conteneur horizontal pour afficher un préfixe (comme "Par") suivi d'un nom d'auteur.
      *
      * @param prefixe Le préfixe textuel (par exemple, "Par" ou "Et").
-     * @param auteur Le nom de l'auteur.
+     * @param auteur  Le nom de l'auteur.
      * @return Un conteneur horizontal contenant le préfixe et l'auteur.
      */
     private HBox creerHBoxAuteur(String prefixe, String auteur) {

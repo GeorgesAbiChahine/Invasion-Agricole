@@ -23,12 +23,14 @@ public class Vaisseau extends EntiteAcceleratrice {
     private final double HAUTEUR_MINIMALE = Partie.DIMENSIONS[1] * 0.6;
     public final double EXTREMITE_DROITE = (Main.LARGEUR * 0.7);
     public final double EXTREMITE_GAUCHE = (Main.LARGEUR * 0.3);
+
+    private final int NB_VIES_MAX = 4;
+
     // Séparé en deux pour dimensions horizontale et verticale, puis en encore en deux pour la direction (+, -)
     private final KeyCode[][] TOUCHES_DE_CONTROLE = {{KeyCode.RIGHT, KeyCode.LEFT}, {KeyCode.DOWN, KeyCode.UP}};
 
     private Image imageBase = new Image("base-vaisseau-off.png");
     private final RayonEnlevement RAYON_ENLEVEMENT = new RayonEnlevement(this);
-    private final int NB_VIES_MAX = 4;
 
     protected boolean estInvincible = false;
     private int nombreVies = 4;
@@ -37,9 +39,6 @@ public class Vaisseau extends EntiteAcceleratrice {
     private boolean estMort = false;
     private boolean estMortEtSortiDeLEcran = false;
 
-    /**
-     * Constructeur de la classe {@code Vaisseau}.
-     */
     public Vaisseau() {
         // Note : largeur = 100
         super(null, null, LARGEUR_VAISSEAU, 140, new Image("extraterrestre.png"),
@@ -47,8 +46,6 @@ public class Vaisseau extends EntiteAcceleratrice {
     }
 
     /**
-     * Initialise la position de départ du vaisseau.
-     *
      * @return Un tableau contenant les coordonnées x et y de départ.
      */
     private static double[] initialiserPosition() {
@@ -74,9 +71,6 @@ public class Vaisseau extends EntiteAcceleratrice {
         return nombreVies;
     }
 
-    /**
-     * @return Le score actuel du joueur (points ou vaches absorbées).
-     */
     public int getNombrePoints() {
         return nombrePoints;
     }
@@ -167,16 +161,7 @@ public class Vaisseau extends EntiteAcceleratrice {
             gererChangementsAcceleration(i, direction);
         }
 
-        // Sauvegarder la direction actuelle des vitesses pour détection de changement de direction
-        int[] directionsPrecedentes = {getDirection(v[0]), getDirection(v[1])};
-
-        // Mettre à jour la position du vaisseau en fonction de la physique (accélération, vitesse, etc.)
-        updatePosition(deltatemps);
-
-        // Annuler toute vitesse si un changement de direction est détecté à cause du ralentissement pour éviter un bug
-        for (int j = 0; j < directionsPrecedentes.length; j++) {
-            if (directionsPrecedentes[j] != 0 && directionsPrecedentes[j] != getDirection(v[j])) v[j] = 0;
-        }
+        updatePositionEnGerantLeBugDAcceleration(deltatemps);
 
         // Changer l'image de la base si une touche est appuyée pour accélérer le vaisseau
         imageBase = (Math.abs(a[0]) == ACCELERATION_BASE || Math.abs(a[1]) == ACCELERATION_BASE) ?
@@ -187,6 +172,19 @@ public class Vaisseau extends EntiteAcceleratrice {
         // Gestion des commandes spéciales
         if (Input.isOneTimeKeyPressed(KeyCode.W) && nombreVies < NB_VIES_MAX) nombreVies++;
         if (Input.isOneTimeKeyPressed(KeyCode.Q)) estInvincible = !estInvincible;
+    }
+
+    private void updatePositionEnGerantLeBugDAcceleration(double deltatemps) {
+        // Sauvegarder la direction actuelle des vitesses pour détection de changement de direction
+        int[] directionsPrecedentes = {getDirection(v[0]), getDirection(v[1])};
+
+        // Mettre à jour la position du vaisseau en fonction de la physique (accélération, vitesse, etc.)
+        updatePosition(deltatemps);
+
+        // Annuler toute vitesse si un changement de direction est détecté à cause du ralentissement pour éviter un bug
+        for (int j = 0; j < directionsPrecedentes.length; j++) {
+            if (directionsPrecedentes[j] != 0 && directionsPrecedentes[j] != getDirection(v[j])) v[j] = 0;
+        }
     }
 
     @Override
@@ -227,11 +225,6 @@ public class Vaisseau extends EntiteAcceleratrice {
         if (nombrePersonnesAbsorbees % 2 == 0 && nombreVies < NB_VIES_MAX) nombreVies++;
     }
 
-    /**
-     * Inflige des dégâts au vaisseau en réduisant son nombre de vies.
-     * Si le vaisseau n'est pas invincible et a encore des vies, celles-ci sont décrémentées.
-     * Si les vies tombent à zéro, le vaisseau est considéré comme mort.
-     */
     public void prendDegats() {
         if (!estInvincible && !estMort) nombreVies--;
         if (nombreVies == 0) estMort = true;

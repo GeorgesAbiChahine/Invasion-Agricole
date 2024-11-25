@@ -45,4 +45,11 @@ public class Camera {
         }
 
     }
+
+    /**
+     * Réinitialise la position de la caméra pour les changements de niveau ou les nouvelles parties.
+     */
+    public void reinitialiser() {
+        xEcran = 0;
+    }
 }

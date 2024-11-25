@@ -26,7 +26,7 @@ public class EntiteAcceleratrice extends Entite {
      */
     public EntiteAcceleratrice(double[] a, double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos, double vitesseMax) {
         super(v, LARGEUR, HAUTEUR, IMAGE, pos);
-        this.a = (a == null) ? new double[]{0,0} : a;
+        this.a = (a == null) ? new double[]{0, 0} : a;
         this.vitesseMax = vitesseMax;
     }
 

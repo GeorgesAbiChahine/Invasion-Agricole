@@ -15,14 +15,8 @@ import java.util.ArrayList;
  * Ces éléments ne sont pas interactifs, mais contribuent à l'ambiance visuelle du jeu.
  */
 public class Decor {
-    /**
-     * Hauteur du sol, représentée en pixels.
-     */
-    public final double SOL_HAUTEUR = 60;
+    public final double HAUTEUR_SOL = 60;
 
-    /**
-     * Liste contenant tous les objets décoratifs à dessiner dans le décor.
-     */
     private final ArrayList<ObjetDecor> OBJETS_DECOR = new ArrayList<>();
 
     /**
@@ -51,7 +45,7 @@ public class Decor {
 
         //Dessine le sol vert.
         contexte.setFill(Color.web("#225500"));
-        contexte.fillRect(0, Partie.DIMENSIONS[1] - SOL_HAUTEUR, Partie.DIMENSIONS[0], SOL_HAUTEUR);
+        contexte.fillRect(0, Partie.DIMENSIONS[1] - HAUTEUR_SOL, Partie.DIMENSIONS[0], HAUTEUR_SOL);
 
         // Dessine tous les objets décoratifs.
         for (var objetsDecor : OBJETS_DECOR) objetsDecor.dessiner(contexte, camera);
@@ -60,9 +54,6 @@ public class Decor {
     /**
      * Ajoute des étoiles dans le décor.
      * Les étoiles sont placées aléatoirement dans la partie supérieure de l'écran.
-     * <p>
-     * Cette méthode utilise la classe {@code Utilitaire} pour générer
-     * des positions aléatoires et des tailles variées pour les étoiles.
      */
     private void ajouterEtoiles() {
         double grandeurEtoile = Utilitaire.genererDouble(8, 15);
@@ -97,7 +88,7 @@ public class Decor {
     }
 
     private void ajouterImageDansListe(Image image, double x) {
-        OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - SOL_HAUTEUR - image.getHeight(),
+        OBJETS_DECOR.add(new ImagesDecor(x, Partie.DIMENSIONS[1] - HAUTEUR_SOL - image.getHeight(),
                 image.getWidth(), image.getHeight(), image));
     }
 }

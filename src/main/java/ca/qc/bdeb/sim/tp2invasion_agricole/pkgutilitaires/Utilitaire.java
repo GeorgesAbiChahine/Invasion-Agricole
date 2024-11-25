@@ -10,8 +10,6 @@ import java.util.Random;
 public class Utilitaire {
 
     /**
-     * Génère un nombre aléatoire de type {@code double} compris entre deux bornes (inclusivement).
-     *
      * @param min La borne minimale (incluse).
      * @param max La borne maximale (exclue).
      * @return Un nombre aléatoire de type {@code double} entre {@code min} et {@code max}.
@@ -21,11 +19,7 @@ public class Utilitaire {
         return gen.nextDouble(min, max);
     }
 
-    /**
-     * Génère une valeur booléenne aléatoire.
-     *
-     * @return {@code true} ou {@code false}, choisi aléatoirement.
-     */
+
     public static boolean genererBoolean() {
         var gen = new Random();
         return gen.nextBoolean();

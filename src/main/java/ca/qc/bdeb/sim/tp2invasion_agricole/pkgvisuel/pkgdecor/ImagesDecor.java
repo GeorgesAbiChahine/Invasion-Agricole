@@ -16,6 +16,7 @@ public class ImagesDecor extends ObjetDecor {
 
     /**
      * Constructeur de la classe {@code ImagesDecor}.
+     *
      * @param x     La position en X de l'image.
      * @param y     La position en Y de l'image.
      * @param l     La largeur de l'image.
@@ -28,13 +29,6 @@ public class ImagesDecor extends ObjetDecor {
         this.image = image;
     }
 
-    /**
-     * Dessine l'image associée à cet objet décoratif sur le canvas.
-     * La position de l'image est ajustée en fonction de la caméra.
-     *
-     * @param contexte Le contexte graphique où l'image sera dessinée.
-     * @param camera   La caméra utilisée pour ajuster la position de l'objet en fonction du déplacement dans le jeu.
-     */
     @Override
     public void dessiner(GraphicsContext contexte, Camera camera) {
         contexte.drawImage(image, camera.getXEcran(x), y, LARGEUR, HAUTEUR);

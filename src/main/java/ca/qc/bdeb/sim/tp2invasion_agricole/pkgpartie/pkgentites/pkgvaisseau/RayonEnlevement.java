@@ -41,7 +41,7 @@ public class RayonEnlevement extends Entite {
      * @param vaisseau Le vaisseau auquel le rayon est attaché.
      * @return La position Y du rayon.
      */
-    protected static double getYRayon(Vaisseau vaisseau) {
+    private static double getYRayon(Vaisseau vaisseau) {
         return (vaisseau.getPos()[1] + vaisseau.getDimensions()[1] - vaisseau.getImageBase().getHeight() / 2);
     }
 
@@ -115,7 +115,7 @@ public class RayonEnlevement extends Entite {
     }
 
     /**
-     * Réactive le rayon lorsque la batterie du vaisseau est rechargé.
+     * Réactive le rayon lorsque la batterie du vaisseau est rechargée.
      */
     private void reactiver() {
         charge = 1;

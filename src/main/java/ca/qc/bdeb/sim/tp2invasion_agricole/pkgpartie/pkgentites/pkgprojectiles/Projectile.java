@@ -6,8 +6,7 @@ import javafx.scene.image.Image;
 
 /**
  * La classe abstraite {@code Projectile} représente les projectiles génériques
- * dans le jeu. Ces projectiles sont des entités accélératrices qui se déplacent
- * vers le vaisseau après avoir été lancé par un fermier, pouvant causer des dégâts au vaisseau.
+ * dans le jeu. Ces projectiles sont lancés par les fermiers pour causer des dégâts au vaisseau.
  */
 public abstract class Projectile extends EntiteAcceleratrice {
 
@@ -44,25 +43,11 @@ public abstract class Projectile extends EntiteAcceleratrice {
         return new double[]{magnitude * (delta[0] / distance), magnitude * (delta[1] / distance)};
     }
 
-    /**
-     * Gère les limites de déplacement du projectile.
-     * Si le projectile sort du jeu, il est marqué pour suppression.
-     *
-     * @param axe       L'axe à vérifier (0 pour X, 1 pour Y).
-     * @param extremite La limite extrême pour cet axe.
-     */
     @Override
     protected void gererLimites(int axe, double extremite) {
         if (pos[axe] < (-DIMENSIONS[axe]) || pos[axe] > extremite) aSupprimer = true;
     }
 
-    /**
-     * Gère les interactions entre le projectile et le vaisseau.
-     * Si le projectile entre en collision avec le vaisseau, il enlève une vie au joueur
-     * et est marqué pour suppression.
-     *
-     * @param vaisseau Le vaisseau cible qui peut subir des dégâts.
-     */
     public void gererAttaqueSurVaisseau(Vaisseau vaisseau) {
         if (estEnCollisionAvec(vaisseau)) {
             vaisseau.prendDegats();

@@ -26,24 +26,32 @@ import java.util.ArrayList;
  * C'est le modèle dans le MVC.
  */
 public class Partie {
+
     // Dimensions du niveau, à ne pas confondre avec les dimensions du Canvas
     public static final double[] DIMENSIONS = {Main.LARGEUR * 4, Main.HAUTEUR};
+
+    //Les entités dans la partie
     private final Vaisseau VAISSEAU = new Vaisseau();
     private final ArrayList<Entite> VACHES = new ArrayList<>();
     private final ArrayList<Entite> FERMIERS = new ArrayList<>();
     private final ArrayList<Entite> PROJECTILES = new ArrayList<>();
+
     // ArrayList contenant les ArrayList de toutes les entités, afin de centraliser toutes les entités et faciliter leurs
     // mises à jour et dessin
     private final ArrayList<ArrayList<Entite>> ENTITES = new ArrayList<>();
+    private final Interface INTERFACE_DU_NIVEAU = new Interface();
+    private final Camera CAMERA = new Camera();
 
     // Indique si le mode déboogage est activé
     private static boolean enDebogage = false;
+
     private int niveauActuel = 1;
+
     // Variable utilisée pour gérer l'animation de fin de niveau, dans laquelle un écran noir s'opacifie de plus en plus
     private double opaciteFinNiveau = 0;
+
     private Decor arrierePlan = new Decor();
-    private Camera camera = new Camera();
-    private Interface interfaceDuNiveau = new Interface();
+
     private boolean finNiveau = false;
 
     public static boolean getModeDebogage() {
@@ -59,8 +67,7 @@ public class Partie {
         finNiveau = false;
         arrierePlan = new Decor();
         VAISSEAU.reinitialiser();
-        camera = new Camera();
-        interfaceDuNiveau = new Interface();
+        CAMERA.reinitialiser();
         genererEntites();
     }
 
@@ -71,10 +78,10 @@ public class Partie {
      * @param contexte Le contexte graphique où le décor sera dessiné.
      */
     public void dessiner(GraphicsContext contexte) {
-        arrierePlan.dessiner(contexte, camera);
-        VAISSEAU.dessiner(contexte, camera);
+        arrierePlan.dessiner(contexte, CAMERA);
+        VAISSEAU.dessiner(contexte, CAMERA);
         dessinerEntites(contexte);
-        interfaceDuNiveau.dessiner(contexte, VAISSEAU, VACHES);
+        INTERFACE_DU_NIVEAU.dessiner(contexte, VAISSEAU, VACHES);
         gererAnimationFinNiveau(contexte);
     }
 
@@ -91,7 +98,7 @@ public class Partie {
 
         gererDebug();
         VAISSEAU.update(deltaTemps);
-        camera.update(VAISSEAU);
+        CAMERA.update(VAISSEAU);
         updateEntites(deltaTemps);
         gererCollisions();
     }
@@ -126,16 +133,10 @@ public class Partie {
      * @param deltaTemps Le temps écoulé depuis la dernière mise à jour.
      */
     private void tenterGenererProjectiles(Fermier fermier, Double deltaTemps) {
-        Projectile projectile = fermier.tenterCreerProjectile(camera, VAISSEAU, deltaTemps);
+        Projectile projectile = fermier.tenterCreerProjectile(CAMERA, VAISSEAU, deltaTemps);
         if (projectile != null) PROJECTILES.add(projectile);
     }
 
-    /**
-     * Met à jour l'état de toutes les entités du jeu.
-     * Supprime les entités marquées pour suppression.
-     *
-     * @param deltaTemps Le temps écoulé depuis la dernière mise à jour.
-     */
     private void updateEntites(double deltaTemps) {
         for (var sousListeEntite : ENTITES) {
             for (int i = 0; i < sousListeEntite.size(); i++) {
@@ -157,14 +158,9 @@ public class Partie {
         }
     }
 
-    /**
-     * Dessine toutes les entités présentes dans le niveau sur le contexte graphique.
-     *
-     * @param contexte Le contexte graphique sur lequel dessiner.
-     */
     private void dessinerEntites(GraphicsContext contexte) {
         for (var sousListeEntite : ENTITES) {
-            for (var entite : sousListeEntite) entite.dessiner(contexte, camera);
+            for (var entite : sousListeEntite) entite.dessiner(contexte, CAMERA);
         }
     }
 

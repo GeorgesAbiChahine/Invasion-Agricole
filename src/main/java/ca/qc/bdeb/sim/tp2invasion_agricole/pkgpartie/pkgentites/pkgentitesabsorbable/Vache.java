@@ -63,12 +63,6 @@ public class Vache extends EntiteAbsorbable {
         }
     }
 
-    /**
-     * Gère l'absorption de la vache par le vaisseau.
-     * Lorsqu'une vache est absorbée, elle ajoute un point au score du joueur.
-     *
-     * @param vaisseau Le vaisseau qui absorbe la vache.
-     */
     @Override
     protected void gererAbsorptionParVaisseau(Vaisseau vaisseau) {
         vaisseau.ajouterPoint();

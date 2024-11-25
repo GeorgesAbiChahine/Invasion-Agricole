@@ -21,19 +21,19 @@ public class Interface {
     /**
      * La batterie affichée dans l'interface, représentant la charge du rayon d'enlèvement du vaisseau.
      */
-    private final Batterie BATTERIE = new Batterie(5,5,200);
+    private final Batterie BATTERIE = new Batterie(5, 5, 200);
 
     /**
      * La mini-carte affichée dans l'interface, représentant les vaches et le vaisseau visibles sur le terrain.
      */
-    private final MiniCarte MINI_CARTE = new MiniCarte(5,60,200);
+    private final MiniCarte MINI_CARTE = new MiniCarte(5, 60, 200);
 
     /**
      * Dessine l'interface utilisateur complète sur le canvas.
      *
      * @param contexte Le contexte graphique où l'interface sera dessinée.
      * @param vaisseau Le vaisseau dont les informations (batterie, points, vies) sont affichées.
-     * @param vaches  La liste des vaches présentes sur le terrain, utilisée pour la mini-carte.
+     * @param vaches   La liste des vaches présentes sur le terrain, utilisée pour la mini-carte.
      */
     public void dessiner(GraphicsContext contexte, Vaisseau vaisseau, ArrayList<Entite> vaches) {
         BATTERIE.dessiner(contexte, vaisseau);

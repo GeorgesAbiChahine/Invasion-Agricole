@@ -19,11 +19,11 @@ public abstract class EntiteAbsorbable extends Entite {
     /**
      * Constructeur de la classe {@code EntiteAbsorbable}.
      *
-     * @param v        La vitesse de l'entité (composantes X et Y).
-     * @param LARGEUR  La largeur de l'entité.
-     * @param HAUTEUR  La hauteur de l'entité.
-     * @param IMAGE    L'image associée à l'entité.
-     * @param pos      La position initiale de l'entité (composantes X et Y).
+     * @param v       La vitesse de l'entité (composantes X et Y).
+     * @param LARGEUR La largeur de l'entité.
+     * @param HAUTEUR La hauteur de l'entité.
+     * @param IMAGE   L'image associée à l'entité.
+     * @param pos     La position initiale de l'entité (composantes X et Y).
      */
     public EntiteAbsorbable(double[] v, double LARGEUR, double HAUTEUR, Image IMAGE, double[] pos) {
         super(v, LARGEUR, HAUTEUR, IMAGE, pos);
@@ -43,11 +43,7 @@ public abstract class EntiteAbsorbable extends Entite {
         if (estEnEnlevement) v[1] = -100;
         else if (!toucheLeSol()) v[1] += GRAVITE * deltatemps;
     }
-    /**
-     * Vérifie si l'entité touche le sol du jeu.
-     *
-     * @return {@code true} si l'entité touche le sol, sinon {@code false}.
-     */
+
     private boolean toucheLeSol() {
         return pos[1] + DIMENSIONS[1] >= Main.HAUTEUR;
     }
