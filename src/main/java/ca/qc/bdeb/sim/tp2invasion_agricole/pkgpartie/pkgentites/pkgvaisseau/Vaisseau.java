@@ -190,8 +190,6 @@ public class Vaisseau extends EntiteAcceleratrice {
     @Override
     protected void updatePosition(double deltatemps) {
         super.updatePosition(deltatemps);
-        // Empêcher le vaisseau de descendre en dessous d'une hauteur minimale définie, sauf s'il est mort
-        if (!estMort) pos[1] = Math.min(pos[1], HAUTEUR_MINIMALE - DIMENSIONS[1]);
     }
 
     /**
@@ -239,8 +237,18 @@ public class Vaisseau extends EntiteAcceleratrice {
 
     @Override
     protected void gererLimites(int axe, double extremite) {
+        // On override l'extremite si on parle de l'axe y et du sol en la remplaçant par la hauteur minimale
+        if (axe == 1 && extremite == Partie.DIMENSIONS[1] - DIMENSIONS[1])
+            extremite = HAUTEUR_MINIMALE - DIMENSIONS[1];
         // S'il est mort, on ignore et il peut dépasser les limites
-        if (!estMort) super.gererLimites(axe, extremite);
+        if (!estMort) {
+            // Si le vaisseau touche une extremité, on met sa vitesse à 0 pour enlever le ralentissement
+            double prevPos = pos[axe];
+            super.gererLimites(axe, extremite);
+            if (prevPos != pos[axe]) {
+                v[axe] = 0;
+            }
+        }
     }
 
     /**
