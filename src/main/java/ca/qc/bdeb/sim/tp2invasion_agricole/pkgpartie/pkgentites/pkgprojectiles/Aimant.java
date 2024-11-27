@@ -50,4 +50,10 @@ public class Aimant extends Projectile {
         super.update(deltatemps);
         calculerForceElectrique(); // Change l'accélération de l'aimant
     }
+
+    @Override
+    protected void regulerVitesse(int indexVitesse) {
+        double module = Math.sqrt(v[0]*v[0] + v[1]*v[1]);
+        if (module > vitesseMax) v[indexVitesse] = v[indexVitesse] * (vitesseMax / module);
+    }
 }

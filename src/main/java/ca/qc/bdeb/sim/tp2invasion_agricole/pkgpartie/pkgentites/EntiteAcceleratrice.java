@@ -51,7 +51,7 @@ public class EntiteAcceleratrice extends Entite {
      *
      * @param indexVitesse L'index de l'axe à réguler (0 pour X, 1 pour Y).
      */
-    private void regulerVitesse(int indexVitesse) {
+    protected void regulerVitesse(int indexVitesse) {
         if (vitesseMax == 0) return;
 
         if (v[indexVitesse] > vitesseMax) v[indexVitesse] = vitesseMax;
