@@ -53,7 +53,7 @@ public class Aimant extends Projectile {
 
     @Override
     protected void regulerVitesse(int indexVitesse) {
-        double module = Math.sqrt(v[0]*v[0] + v[1]*v[1]);
+        double module = Math.sqrt(v[0] * v[0] + v[1] * v[1]);
         if (module > vitesseMax) v[indexVitesse] = v[indexVitesse] * (vitesseMax / module);
     }
 }

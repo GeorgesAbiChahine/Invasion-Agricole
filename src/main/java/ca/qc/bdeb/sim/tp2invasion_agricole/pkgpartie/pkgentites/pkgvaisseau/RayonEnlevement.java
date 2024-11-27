@@ -24,6 +24,8 @@ public class RayonEnlevement extends Entite {
      */
     private boolean peutEnlever = true;
 
+    private boolean desactiverCarMortVaisseau = false;
+
     /**
      * Constructeur de la classe {@code RayonEnlevement}.
      * Initialise le rayon d'enlèvement en fonction de la position et des dimensions du vaisseau.
@@ -78,7 +80,11 @@ public class RayonEnlevement extends Entite {
             charge += VITESSE_CHARGEMENT * deltaTemps;
         }
 
-        if (charge <= 0) desactiver();
+        if (charge <= 0) {
+            desactiver();
+            charge = 0;
+            peutEnlever = false;
+        }
 
         if (charge >= 1 || Input.isOneTimeKeyPressed(KeyCode.E)) reactiver();
 
@@ -102,7 +108,7 @@ public class RayonEnlevement extends Entite {
 
     @Override
     public void gererDessinDebogage(GraphicsContext contexte, Camera camera) {
-        if (peutEnlever) super.gererDessinDebogage(contexte, camera);
+        if (!desactiverCarMortVaisseau) super.gererDessinDebogage(contexte, camera);
     }
 
     /**
@@ -110,8 +116,7 @@ public class RayonEnlevement extends Entite {
      */
     protected void desactiver() {
         DIMENSIONS[1] = 0;
-        charge = 0;
-        peutEnlever = false;
+        desactiverCarMortVaisseau = true;
     }
 
     /**
