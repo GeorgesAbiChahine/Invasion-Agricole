@@ -24,6 +24,9 @@ public class RayonEnlevement extends Entite {
      */
     private boolean peutEnlever = true;
 
+    /**
+     * Désactive le dessin de débogage du rayon lorsque le vaisseau meurt.
+     */
     private boolean desactiverCarMortVaisseau = false;
 
     /**
@@ -81,12 +84,15 @@ public class RayonEnlevement extends Entite {
         }
 
         if (charge <= 0) {
-            desactiver();
+            DIMENSIONS[1] = 0;
             charge = 0;
             peutEnlever = false;
         }
 
-        if (charge >= 1 || Input.isOneTimeKeyPressed(KeyCode.E)) reactiver();
+        if (charge >= 1 || Input.isOneTimeKeyPressed(KeyCode.E)) {
+            charge = 1;
+            peutEnlever = true;
+        }
 
     }
 
@@ -112,18 +118,10 @@ public class RayonEnlevement extends Entite {
     }
 
     /**
-     * Désactive le rayon en réinitialisant sa longueur et en empêchant les enlèvements.
+     * Désactive le rayon en réinitialisant sa longueur et en empêchant le dessin de son mode débogage.
      */
     protected void desactiver() {
         DIMENSIONS[1] = 0;
         desactiverCarMortVaisseau = true;
-    }
-
-    /**
-     * Réactive le rayon lorsque la batterie du vaisseau est rechargée.
-     */
-    private void reactiver() {
-        charge = 1;
-        peutEnlever = true;
     }
 }
