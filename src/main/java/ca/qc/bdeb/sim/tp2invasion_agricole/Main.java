@@ -138,7 +138,7 @@ public class Main extends Application {
             if (e.getCode() == KeyCode.ESCAPE) {
                 creerSceneIntro();
                 timer.stop();
-            } else Input.setKeyPressed(e.getCode(), true);
+            } else if (!Input.isKeyPressed(e.getCode())) Input.setKeyPressed(e.getCode(), true);
         });
 
         root.setOnKeyReleased(e -> Input.setKeyPressed(e.getCode(), false));

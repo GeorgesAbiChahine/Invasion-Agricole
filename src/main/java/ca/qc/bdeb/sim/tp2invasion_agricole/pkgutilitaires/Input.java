@@ -11,14 +11,20 @@ import java.util.HashMap;
  */
 public class Input {
 
-    private static final HashMap<KeyCode, Boolean> TOUCHES = new HashMap<>();
+    private static final HashMap<KeyCode, Touche> TOUCHES = new HashMap<>();
 
     public static boolean isKeyPressed(KeyCode code) {
-        return TOUCHES.getOrDefault(code, false);
+        Touche touche = TOUCHES.get(code);
+        if (touche == null) return false;
+        return touche.isAPPUYEE();
     }
 
     public static void setKeyPressed(KeyCode code, Boolean isPressed) {
-        TOUCHES.put(code, isPressed);
+            TOUCHES.put(code, new Touche(isPressed));
+    }
+
+    public static void setOneTimeKeyPressed(KeyCode code, Boolean isPressed) {
+        TOUCHES.put(code, new Touche(isPressed, true));
     }
 
     /**
@@ -29,8 +35,11 @@ public class Input {
      * @return {@code true} si la touche a été appuyée une seule fois, sinon {@code false}.
      */
     public static boolean isOneTimeKeyPressed(KeyCode code) {
-        boolean touchePressee = TOUCHES.getOrDefault(code, false);
-        if (touchePressee) setKeyPressed(code, false);
+        Touche touche = TOUCHES.get(code);
+        if (touche == null) return false;
+
+        boolean touchePressee = touche.isAppuyeeAvecDelai();
+        if (touchePressee) setOneTimeKeyPressed(code, true);
         return touchePressee;
     }
 }
